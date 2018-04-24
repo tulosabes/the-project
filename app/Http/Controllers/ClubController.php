@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 // importar App\Users para trabajar con eloquent
 use App\Club;
+use App\Provincia;
+use App\Poblacion;
 
 // importar Rule para hacer la regla de validacion de email
 use Illuminate\Validation\Rule;
@@ -33,8 +35,11 @@ class ClubController extends Controller
 
     public function edit(Club $club){
 
+        $provincias = Provincia::orderBy('provincia', 'asc')->get();
 
-    	return view('club.edit', ['club' => $club]);
+        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
+
+    	return view('club.edit', compact('club','provincias','poblaciones'));
     }
 
     public function update(Club $club){

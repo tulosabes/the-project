@@ -18,7 +18,7 @@ class PerfilUsuarioLogin extends Controller
 
 	public function index(){
 
-		$title = 'Bienvenido a tu perfil de usuario';
+		$title = 'Bienvenido a tu perfil';
 
 		$admin = auth()->user();
 

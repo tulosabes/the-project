@@ -25,9 +25,30 @@ class Club extends Model
         // de esta manera conseguimos que un usuario puede acceder a los valores de la tabla profesion y asi nos muestre los valores de dicha tabla a los que esta asociado el usuario      
     }
 
-    public function obtenerServicio(){
+    public function obtenerPoblacion(){
 
-        $servicio = Servicio::find($this->id_servicio);
+        $poblacion = Poblacion::find($this->id_poblacion);
+
+        return $poblacion->poblacion;
+    }    
+
+    public function obtenerProvincia(){
+
+        $provincia = Provincia::find($this->id_provincia);
+
+        return $provincia->provincia;
+    }
+
+    public function obtenerCPostal(){
+
+        $poblacion = Poblacion::find($this->id_poblacion);
+
+        return $poblacion->c_postal;
+    } 
+
+    public function obtenerServicio($id){
+
+        $servicio = Servicio::find($id);
 
         //dd($servicio->name);
 

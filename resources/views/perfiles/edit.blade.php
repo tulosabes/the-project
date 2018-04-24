@@ -4,7 +4,7 @@
 
 @section('content')
 
-	<div class="card">
+	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
 			Editar administrador {{ $admin->name }}
@@ -22,217 +22,248 @@
 				-->
 
 				
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="name" class="control-label">Nombre:</label>
-					<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $admin->name) }}">
-
-					@if ($errors->has('name'))
-
-						<div class="alert alert-danger">{{ $errors->first('name') }}</div>
-
-					@endif
-
-				</div>
-
-				<div class="form-group">
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
 					
-					<label for="apellidos" class="control-label">Apellidos:</label>
-					<input type="text" name="apellidos" id="apellidos" placeholder="Garcia Garcia" class="form-control" value="{{ old('apellidos', $admin->apellidos) }}">
+						<label for="name" class="control-label">Nombre:</label>
+						<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $admin->name) }}">
 
-					@if ($errors->has('apellidos'))
+						@if ($errors->has('name'))
 
-						<div class="alert alert-danger">{{ $errors->first('apellidos') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('name') }}</div>
 
-					@endif
+						@endif
 
-				</div>
+					</div>
 
-				<div class="form-group">
-					
-					<label for="dnis" class="control-label">Dni:</label>
-					<select id="dnis" name="dnis" class="form-control">
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
 						
-						<option value="nifs">NIF</option>
-						<option value="nie">NIE</option>
+						<label for="apellidos" class="control-label">Apellidos:</label>
+						<input type="text" name="apellidos" id="apellidos" placeholder="Garcia Garcia" class="form-control" value="{{ old('apellidos', $admin->apellidos) }}">
 
-					</select>
+						@if ($errors->has('apellidos'))
 
+							<div class="alert alert-danger">{{ $errors->first('apellidos') }}</div>
 
-					<input type="text" name="dni" id="dni" placeholder="48300300w" class="form-control"  value="{{ old('dni', $admin->dni) }}">
+						@endif
 
-					@if ($errors->has('dni'))
-
-						<div class="alert alert-danger">{{ $errors->first('dni') }}</div>
-
-					@endif
-
-					<input type="text" name="nif" id="nif" placeholder="x8300300w" class="form-control"  value="{{ old('nif', $admin->nif) }}">
-
-					@if ($errors->has('nif'))
-
-						<div class="alert alert-danger">{{ $errors->first('nif') }}</div>
-
-					@endif
+					</div>
 
 				</div>
 
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="email" class="control-label">Correo electrónico:</label>
-					<input type="email" name="email" id="email" placeholder="ejemplo@ejemplo.com" class="form-control" value="{{ old('email' , $admin->email) }}"><!-- en value le ponemos el metodo old('nombre_campo') con esto hacemos que se guarde el valor en caso de tener errores en los demas campos-->
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
+					
+						<label for="dnis" class="control-label">Tipo de documento:</label>
+						<select id="dnis" name="dnis" class="form-control">
 
-					@if ($errors->has('email'))
+							<option value="sin">Sin documento</option>							
+							<option value="nifs">NIF</option>
+							<option value="nie">NIE</option>
+							
 
-						<div class="alert alert-danger">{{ $errors->first('email') }}</div>
+						</select>
 
-					@endif
+
+						<input type="text" name="dni" id="dni" placeholder="48300300w" class="form-control"  value="{{ old('dni', $admin->dni) }}">
+
+						@if ($errors->has('dni'))
+
+							<div class="alert alert-danger">{{ $errors->first('dni') }}</div>
+
+						@endif
+
+						<input type="text" name="nif" id="nif" placeholder="x8300300w" class="form-control"  value="{{ old('nif', $admin->nif) }}">
+
+						@if ($errors->has('nif'))
+
+							<div class="alert alert-danger">{{ $errors->first('nif') }}</div>
+
+						@endif
+
+					</div>
 
 				</div>
 
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="telefono" class="control-label">Telefono:</label>
-					<input type="text" name="telefono" id="telefono" placeholder="666777888" class="form-control"  value="{{ old('telefono', $admin->telefono) }}">
+					<div class="form-group col-sm-12 col-md-8 col-lg-6">
+					
+						<label for="email" class="control-label">Correo electrónico:</label>
+						<input type="email" name="email" id="email" placeholder="ejemplo@ejemplo.com" class="form-control" value="{{ old('email' , $admin->email) }}"><!-- en value le ponemos el metodo old('nombre_campo') con esto hacemos que se guarde el valor en caso de tener errores en los demas campos-->
 
-					@if ($errors->has('telefono'))
+						@if ($errors->has('email'))
 
-						<div class="alert alert-danger">{{ $errors->first('telefono') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('email') }}</div>
 
-					@endif
+						@endif
+
+					</div>
+
+					<div class="form-group col-sm-12 col-md-4 col-lg-4">
+						
+						<label for="telefono" class="control-label">Teléfono:</label>
+						<input type="text" name="telefono" id="telefono" placeholder="666777888" class="form-control"  value="{{ old('telefono', $admin->telefono) }}">
+
+						@if ($errors->has('telefono'))
+
+							<div class="alert alert-danger">{{ $errors->first('telefono') }}</div>
+
+						@endif
+
+					</div>
 
 				</div>	
 
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="nivel" class="control-label">Nivel:</label>
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
+					
+						<label for="nivel" class="control-label">Nivel:</label>
 
-					<select name="niveles" id="niveles" class="form-control">
+						<select name="niveles" id="niveles" class="form-control">
 
-						@foreach ($niveles as $nivel)
+							@foreach ($niveles as $nivel)
 
-							@if ($admin->id_nivel === $nivel->id)
+								@if ($admin->id_nivel === $nivel->id)
 
-								<option value="{{ $nivel->id }}" selected="selected">{{ $nivel['nivel'] }}</option>
+									<option value="{{ $nivel->id }}" selected="selected">{{ $nivel['nivel'] }}</option>
 
-							@else
+								@else
 
-								<option value="{{ $nivel->id }}">{{ $nivel['nivel'] }}</option>
+									<option value="{{ $nivel->id }}">{{ $nivel['nivel'] }}</option>
 
-							@endif
+								@endif
 
-						@endforeach
+							@endforeach
 
-					</select>
+						</select>
 
-					@if ($errors->has('niveles'))
+						@if ($errors->has('niveles'))
 
-						<div class="alert alert-danger">{{ $errors->first('niveles') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('niveles') }}</div>
 
-					@endif
+						@endif
+
+					</div>
 
 				</div>
 
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="direccion" class="control-label">Direccion:</label>
-					<input type="text" name="direccion" id="direccion" placeholder="" class="form-control" value="{{ old('direccion', $admin->direccion) }}">
+					<div class="form-group col-sm-12 col-md-12 col-lg-10">
+					
+						<label for="direccion" class="control-label">Dirección:</label>
+						<input type="text" name="direccion" id="direccion" placeholder="" class="form-control" value="{{ old('direccion', $admin->direccion) }}">
 
-					@if ($errors->has('direccion'))
+						@if ($errors->has('direccion'))
 
-						<div class="alert alert-danger">{{ $errors->first('direccion') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('direccion') }}</div>
 
-					@endif
+						@endif
+
+					</div>
+
+					<div class="from-group col-sm-12 col-md-4 col-lg-4">
+	                    
+	                    <label for="provincia" class="control-label">Provincia:</label>
+	                    <select name="provincia" id="provincia" class="form-control">
+	                        
+	                        @foreach($provincias as $pro)
+
+	                        	
+
+	                            @if ($admin->id_provincia === $pro->id)
+
+	                        		<option value="{{ $pro->id }}" selected="selected">{{ $pro->provincia }}</option>
+
+	                        	@else
+
+	                        		<option value="{{ $pro->id }}">{{ $pro->provincia }}</option>
+
+	                        	@endif
+
+	                                                        
+
+	                        @endforeach
+
+	                    </select>
+
+	                    @if ($errors->has('provincia'))
+
+	                        <div class="alert alert-danger">{{ $errors->first('provincia') }}</div>
+
+	                    @endif
+
+
+	                </div>
+
+	                <div class="from-group col-sm-12 col-md-4 col-lg-4">
+	                    
+	                    <label for="poblacion" class="control-label">Población:</label>
+	                    <select name="poblacion" id="poblacion" class="form-control">
+	                        
+	                        @foreach ($poblaciones as $poblacion)
+
+
+	                            @if ($admin->id_poblacion === $poblacion->id)
+
+	                        		<option value="{{ $poblacion->id }}" selected="selected">{{ $poblacion->poblacion }}</option>
+
+	                        	@else
+
+	                        		<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
+
+	                        	@endif
+
+
+	                        @endforeach
+
+
+	                    </select>
+
+	                    @if ($errors->has('poblacion'))
+
+	                        <div class="alert alert-danger">{{ $errors->first('poblacion') }}</div>
+
+	                    @endif
+
+
+	                </div>
 
 				</div>
 
-				<div class="from-group">
-                    
-                    <label for="provincia" class="control-label">Provincia:</label>
-                    <select name="provincia" id="provincia" class="form-control">
-                        
-                        @foreach($provincias as $pro)
-
-                        	
-
-                            @if ($admin->id_provincia === $pro->id)
-
-                        		<option value="{{ $pro->id }}" selected="selected">{{ $pro->provincia }}</option>
-
-                        	@else
-
-                        		<option value="{{ $pro->id }}">{{ $pro->provincia }}</option>
-
-                        	@endif
-
-                                                        
-
-                        @endforeach
-
-                    </select>
-
-                    @if ($errors->has('provincia'))
-
-                        <div class="alert alert-danger">{{ $errors->first('provincia') }}</div>
-
-                    @endif
-
-
-                </div>
-
-                <div class="from-group">
-                    
-                    <label for="poblacion" class="control-label">Poblacion:</label>
-                    <select name="poblacion" id="poblacion" class="form-control">
-                        
-                        @foreach ($poblaciones as $poblacion)
-
-
-                            @if ($admin->id_poblacion === $poblacion->id)
-
-                        		<option value="{{ $poblacion->id }}" selected="selected">{{ $poblacion->poblacion }}</option>
-
-                        	@else
-
-                        		<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
-
-                        	@endif
-
-
-                        @endforeach
-
-
-                    </select>
-
-                    @if ($errors->has('poblacion'))
-
-                        <div class="alert alert-danger">{{ $errors->first('poblacion') }}</div>
-
-                    @endif
-
-
-                </div>
-
-				<div class="form-group">
+				<div class="row">
 					
-					<label for="password" class="control-label">Contraseña:</label>
-					<input type="password" name="password" id="password" placeholder="Mayor a 6 caracteres" class="form-control">
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
+					
+						<label for="password" class="control-label">Contraseña:</label>
+						<input type="password" name="password" id="password" placeholder="Mayor a 6 caracteres" class="form-control">
 
-					@if ($errors->has('password'))
+						@if ($errors->has('password'))
 
-						<div class="alert alert-danger">{{ $errors->first('password') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('password') }}</div>
 
-					@endif
+						@endif
+
+					</div>
 
 				</div>
 
-				<button type="submit" class="btn btn-success">Actualizar administrador</button>
-				<a href="{{ route('perfiles.index') }}" class="btn btn-warning">Volver</a>
+				<div class="row">
+					
+					<button type="submit" class="btn btn-primary">Actualizar administrador</button>
+					<a href="{{ route('perfiles.index') }}" class="btn btn-warning">Volver</a>
+
+				</div>
 
 			</form>
 
 		</div>
 
 	</div>
+
 
 @endsection

@@ -10,6 +10,8 @@
 
 	<p>Apellidos del empleado: {{ $empleado->apellidos }}</p>
 
+	<p>Fecha de nacimiento: {{ $empleado->formatoFecha($empleado->id) }}
+
 	@if ($empleado->dni === null)
 
 		<p>NIE del empleado: {{ $empleado->nif }}</p>
@@ -39,6 +41,6 @@
 	<!--<p><a href="{{ route('empleados.index') }}">Volver al listado de empleados</a></p>-->
 
 	<!--con boton me gusta mas-->
-	<form action="{{ route('empleados.index') }}"><button type="submit" class="btn btn-success">Volver</button></form>
+	<form action="{{ route('empleados.index') }}"><button type="submit" class="btn btn-warning">Volver</button></form>
 
 @endsection

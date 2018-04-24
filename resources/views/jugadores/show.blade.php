@@ -10,6 +10,8 @@
 
 	<p>Apellidos del jugador: {{ $jugador->apellidos }}</p>
 
+	<p>Fecha de nacimiento: {{ $jugador->formatoFecha($jugador->id) }}
+
 	@if ($jugador->dni === null)
 
 		<p>NIE del jugador: {{ $jugador->nif }}</p>
@@ -32,6 +34,6 @@
 
 	<p>Población del jugador: {{ $jugador->obtenerPoblacion() }}</p>
 
-	<form action="{{ route('jugadores.index') }}"><button type="submit" class="btn btn-success">Volver</button></form>
+	<form action="{{ route('jugadores.index') }}"><button type="submit" class="btn btn-warning">Volver</button></form>
 
 @endsection

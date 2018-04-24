@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Carbon\Carbon;
+use App\User;
+
 class User extends Authenticatable
 {
 
@@ -18,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'dni','nif' ,'id_rol', 'id_nivel', 'telefono', 'id_poblacion', 'id_provincia', 'c_postal', 'apellidos', 'direccion'
+        'name', 'email', 'password', 'dni','nif' ,'id_rol', 'id_nivel', 'telefono', 'id_poblacion', 'id_provincia', 'c_postal', 'apellidos', 'direccion','sexo', 'fecha_nacimiento'
     ];
 
     /**
@@ -92,6 +95,13 @@ class User extends Authenticatable
         return $provincia->provincia;
     }    
 
+    public function obtenerCPostal(){
+
+        $poblacion = Poblacion::find($this->id_poblacion);
+
+        return $poblacion->c_postal;
+    } 
+
     public function isAdmin(){
 
         return $this->id_rol;
@@ -100,5 +110,14 @@ class User extends Authenticatable
     public static function findByEmail($email){
 
         return static::where(compact('email'))->first(); // compara el email con el pasado por parametro
+    }
+
+    public function formatoFecha($id){
+
+        $emp = User::find($id);
+
+        $date = Carbon::parse($emp->fecha_nacimiento)->format('d-m-Y'); // para darle formato español a la fecha
+
+        return $date;
     }
 }

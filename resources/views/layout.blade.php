@@ -66,8 +66,8 @@
 
             @section('loginRegister')
 
-              <li class="nav-item active"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
-              <li class="nav-item active"><a href="{{ route('register') }}" class="nav-link">Registrarse</a></li>
+              <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
+              <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Registrarse</a></li>
 
             @show
 
@@ -108,41 +108,38 @@
 
     </main>
 
-    <footer class="footer fixed-bottom bg-dark">
-      <div class="container">
-        <div class="row">
-          
-          <div class="col-3">
+    @section('footer')
+      <footer class="footer fixed-bottom bg-dark">
+        <div class="container">
+          <div class="row mt-3">
             
-            <p>RP-PADEL</p>
+            <div class="col-sm-12 col-md-4">
+              
+              <p>RP-PADEL</p>
 
-            <p>Avenida Enric Valor, 15 Pol. Ind. La Cala</p>
+              <p>Avenida Enric Valor, 15 Pol. Ind. La Cala</p>
 
-            <p>03509 Finestrat (Alicante)</p>
+              <p>03509 Finestrat (Alicante)</p>
 
-          </div>  
+            </div>  
 
-          <div class="col-4">
-            
+            <div class="col-sm-12 col-md-4">
+              
+
+
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+
+              <a href="">Contacto</a>
+              
+            </div>
 
 
           </div>
-
-          <div class="col-4">
-
-            <a href="">Contacto</a>
-            
-          </div>
-
-
         </div>
-      </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    
+      </footer>
+    @show
     
     
 </html>

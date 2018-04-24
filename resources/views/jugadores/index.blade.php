@@ -8,7 +8,7 @@
 		
 		<h1 class="pb-2">{{ $title }}</h1>
 
-		<p><a href="{{ route('jugadores.create') }}" class="btn btn-primary">Crear jugador</a></p>
+		<p><a href="{{ route('jugadores.create') }}" class="btn btn-success">Crear jugador</a></p>
 
 	</div>
 
@@ -25,11 +25,12 @@
 						<th>Apellidos</th>
 						<th>Dni</th>
 						<th>Email</th>
-						<th>Telefono</th>
+						<th>Teléfono</th>
 						<th>Nivel</th>
 						<th>Dirección</th>
 						<th>Población</th>
 						<th>Provincia</th>
+						<th>CP</th>
 						<th>Acciones</th>
 
 					</tr>
@@ -41,8 +42,8 @@
 					@foreach ($jugadores as $jugador)
 
 						<tr>
-							<td>{{ $jugador->name }}</td>
-							<td>{{ $jugador->apellidos }}</td>
+							<td>{{ ucwords($jugador->name) }}</td>
+							<td>{{ ucwords($jugador->apellidos) }}</td>
 							
 							@if ($jugador->dni === null)
 
@@ -57,9 +58,10 @@
 							<td>{{ $jugador->email }}</td>
 							<td>{{ $jugador->telefono }}</td>
 							<td>{{ $jugador->obtenerNivel() }}</td>
-							<td>{{ $jugador->direccion }}</td>
+							<td>{{ ucwords($jugador->direccion) }}</td>
 							<td>{{ $jugador->obtenerPoblacion() }}</td>
 							<td>{{ $jugador->obtenerProvincia() }}</td>
+							<td>{{ $jugador->obtenerCPostal() }}</td>
 				
 							<td>
 								
@@ -72,11 +74,11 @@
 
 									<div class="btn-group">
 										
-										<a href="{{ route('jugadores.show', $jugador) }}" class="btn btn-success"><span class="oi oi-eye"></span></a>
+										<a href="{{ route('jugadores.show', $jugador) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-										<a href="{{ route('jugadores.edit', $jugador) }}" class="btn btn-warning"><span class="oi oi-pencil"></span></a>
+										<a href="{{ route('jugadores.edit', $jugador) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 
-										<button type="submit" class="btn btn-danger"><span class="oi oi-trash"></span></button>
+										<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
 
 									</div>
 								</form>

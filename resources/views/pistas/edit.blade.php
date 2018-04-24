@@ -4,7 +4,7 @@
 
 @section('content')
 
-	<div class="card">
+	<div class="card col-sm-12 col-md-10 col-lg-6">
 		
 		<h4 class="card-header">
 			Editar {{ $pista->name }}
@@ -18,62 +18,80 @@
 
 				{!! csrf_field() !!}
 				
-				<div class="form-group">
-					
-					<label for="name" class="control-label">Nombre:</label>
-					<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $pista->name) }}">
+				<div class="row">
+					<div class="form-group col-sm-12 col-md-6">
+						
+						<label for="name" class="control-label">Nombre:</label>
+						<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $pista->name) }}">
 
-					@if ($errors->has('name'))
+						@if ($errors->has('name'))
 
-						<div class="alert alert-danger">{{ $errors->first('name') }}</div>
-
-					@endif
-
-				</div>
-
-				<div class="form-group">
-					
-					<label for="descripcion" class="control-label">Descripción:</label>
-					<textarea name="descripcion" id="descripcion" class="form-control" value="{{ old('descripcion', $pista->descripcion) }}" maxlength="150">{{ old('descripcion', $pista->descripcion) }}</textarea>
-
-					@if ($errors->has('descripcion'))
-
-						<div class="alert alert-danger">{{ $errors->first('descripcion') }}</div>
-
-					@endif
-
-				</div>
-
-				<div class="form-group">
-					
-					<label for="disponibilidad" class="control-label">Disponible:</label>
-					<select name="disponibilidad" id="disponibilidad" class="form-control">
-
-						@if ($pista->disponibilidad === 0)
-
-							<option value="0" selected="selected">No disponible</option>
-							<option value="1">Disponible</option>
-
-						@else
-
-							<option value="0">No disponible</option>
-							<option value="1" selected="selected">Disponible</option>
+							<div class="alert alert-danger">{{ $errors->first('name') }}</div>
 
 						@endif
-	
 
-					</select>
+					</div>
+				</div>
 
-					@if ($errors->has('disponible'))
+				<div class="row">
+					
+					<div class="form-group col-sm-12 col-md-10">
+					
+						<label for="descripcion" class="control-label">Descripción:</label>
+						<textarea name="descripcion" id="descripcion" class="form-control" value="{{ old('descripcion', $pista->descripcion) }}" maxlength="150">{{ old('descripcion', $pista->descripcion) }}</textarea>
 
-						<div class="alert alert-danger">{{ $errors->first('disponible') }}</div>
+						@if ($errors->has('descripcion'))
 
-					@endif
+							<div class="alert alert-danger">{{ $errors->first('descripcion') }}</div>
+
+						@endif
+
+					</div>
 
 				</div>
 
-				<button type="submit" class="btn btn-success">Actualizar pista</button>
-				<a href="{{ route('pistas.index') }}" class="btn btn-warning">Volver</a>
+				<div class="row">
+					
+					<div class="form-group col-sm-12 col-md-6">
+					
+						<label for="disponibilidad" class="control-label">Disponibilidad:</label>
+						<select name="disponibilidad" id="disponibilidad" class="form-control">
+
+							@if ($pista->disponibilidad === 0)
+
+								<option value="0" selected="selected">No disponible</option>
+								<option value="1">Disponible</option>
+
+							@else
+
+								<option value="0">No disponible</option>
+								<option value="1" selected="selected">Disponible</option>
+
+							@endif
+		
+
+						</select>
+
+						@if ($errors->has('disponible'))
+
+							<div class="alert alert-danger">{{ $errors->first('disponible') }}</div>
+
+						@endif
+
+					</div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="form-group col-sm-12">
+						
+						<button type="submit" class="btn btn-primary">Actualizar pista</button>
+						<a href="{{ route('pistas.index') }}" class="btn btn-warning">Volver</a>
+
+					</div>	
+
+				</div>
 
 			</form>
 

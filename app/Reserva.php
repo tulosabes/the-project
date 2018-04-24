@@ -14,7 +14,7 @@ class Reserva extends Model
 {
     protected $table = 'reservas';
 
-    protected $fillable = ['id_hace:reserva', 'id_horario','id_pista','id_jugador_1','id_jugador_2','id_jugador_3','id_jugador_4','nivel','fecha'];
+    protected $fillable = ['id_hace:reserva', 'id_horario','id_pista','id_jugador_1','id_jugador_2','id_jugador_3','id_jugador_4','id_nivel','fecha'];
 
 	public function users(){
 
@@ -63,7 +63,7 @@ class Reserva extends Model
         //whereNotNull('id_jugador_1')->whereNotNull('id_jugador_2')->whereNotNull('id_jugador_3')->whereNotNull('id_jugador_4')->
 
         //dd($jugadores->contarNumeroJugadores());
-        //dd($jugadores->id);
+        //dd($jugadores);
 
 
         $bool = true;
@@ -96,7 +96,7 @@ class Reserva extends Model
 
     }
 
-    
+
     public function obtenerNameJugadores($id){
 
         $user = User::find($id);
@@ -202,7 +202,12 @@ class Reserva extends Model
     }
 
 
+    public function existeJugadoReserva($id_jugador,$id_pista,$id_horario){
 
+
+        $existeJugador = Reserva::where('id_jugador_1','=',$id_jugador_1)->where('id_jugador_2','=',$id_jugador_2)->where('id_jugador_3','=',$id_jugador_3)->where('id_jugador_4','=',$id_jugador_4)->where('fecha','=',$fecha)->where('id_pista','=',$id_pista)->where('id_horario','=',$id_horario)->get();
+
+    }
 
 
 

@@ -4,7 +4,7 @@
 
 @section('content')
 
-	<div class="card">
+	<div class="card col-sm-12 col-md-10 col-lg-10">
 		
 		<h4 class="card-header">
 			Crear reserva
@@ -21,14 +21,14 @@
 
 				<div class="row">
 					
-					<div class="form-group col-3">
+					<div class="form-group col-sm-12 col-md-12 col-lg-3">
 						
 						<label for="fecha">Fecha</label>
 						<input type="date" name="fecha" id="fecha" value="{{ $datos['fecha'] }}" min="{{ $datos['fecha'] }}" max="{{ $datos['fecha'] }}" class="form-control"></input>
 
 					</div>
 
-					<div class="form-group col-3">
+					<div class="form-group col-sm-12 col-md-12 col-lg-3">
 					
 						<label for="pistas" class="control-label">Pista:</label><br>
 
@@ -60,7 +60,7 @@
 
 					</div>
 
-					<div class="form-group col-3">
+					<div class="form-group col-sm-12 col-md-12 col-lg-3">
 
 						<label for="horarios" class="control-label">Horario:</label><br>
 
@@ -93,7 +93,7 @@
 					</div>
 					
 
-					<div class="form-group col-3">
+					<div class="form-group col-sm-12 col-md-12 col-lg-3">
 					
 						<label for="nivel" class="control-label">Nivel:</label>
 
@@ -121,7 +121,7 @@
 
 				<div class="row">
 					
-					<div class="form-group col-3">
+					<div class="form-group col-sm-12 col-md-12 col-lg-3">
                     
 	                    <label for="jugador1" class="control-label">Jugador 1:</label>
 	                    <select name="jugador1" id="jugador1" class="form-control">
@@ -160,7 +160,7 @@
 
 	                </div>
 
-	                <div class="form-group col-3">
+	                <div class="form-group col-sm-12 col-md-12 col-lg-3">
 	                    
 	                    <label for="jugador2" class="control-label">Jugador 2:</label>
 	                    <select name="jugador2" id="jugador2" class="form-control">
@@ -198,7 +198,7 @@
 
 	                </div>
 
-	                <div class="form-group col-3">
+	                <div class="form-group col-sm-12 col-md-12 col-lg-3">
 	                    
 	                    <label for="jugador3" class="control-label">Jugador 3:</label>
 	                    <select name="jugador3" id="jugador3" class="form-control">
@@ -236,7 +236,7 @@
 
 	                </div>
 
-	                <div class="form-group col-3">
+	                <div class="form-group col-sm-12 col-md-12 col-lg-3">
 	                    
 	                    <label for="jugador4" class="control-label">Jugador 4:</label>
 	                    <select name="jugador4" id="jugador4" class="form-control">

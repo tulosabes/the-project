@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// importar la clase para trabajar con bases de datos
+use Illuminate\Support\Facades\DB;
 
 use App\Reserva;
 
 use App\Pista;
 use App\Horario;
-use Carbon\Carbon;
-
 use App\User;
 use App\Nivel;
+use App\Club;
+
+use Carbon\Carbon;
+
+// importar Rule para hacer la regla de validacion de email
+use Illuminate\Validation\Rule;
 
 
 class ReservasController extends Controller
@@ -20,6 +26,8 @@ class ReservasController extends Controller
 	public function index(){
 
 		$title = 'Bienvenido a reservas';
+
+		$club = Club::first();
 
 		$pistas = Pista::all();
 
@@ -40,7 +48,7 @@ class ReservasController extends Controller
 
 		//dd($reservasCompletas);
 
-		return view('reservas.index', compact('title', 'reservas', 'reservasCompletas', 'reservasIncompletas', 'pistas', 'horarios' , 'date'));
+		return view('reservas.index', compact('title', 'reservas', 'reservasCompletas', 'reservasIncompletas', 'pistas', 'horarios' , 'date', 'club'));
 
 	}
 
@@ -81,43 +89,133 @@ class ReservasController extends Controller
 		//dd($datos);
 
 		$datos = request()->validate([
-
+			
 			'fecha' => 'required',
 			'pistas' => 'required',
 			'horarios' => 'required',
 			'niveles' => 'required',
-			'jugador1' => 'required_if:jugador2,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable',
-			'jugador2' => 'required_if:jugador1,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable',
-			'jugador3' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador4,==,null|nullable',
-			'jugador4' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador3,==,null|nullable',
+			'jugador1' => 'required_if:jugador2,=,null|required_if:jugador3,=,null|required_if:jugador4,=,null|nullable',
+			'jugador2' => 'required_if:jugador1,=,null|required_if:jugador3,=,null|required_if:jugador4,=,null|nullable',
+			'jugador3' => 'required_if:jugador1,=,null|required_if:jugador2,=,null|required_if:jugador4,=,null|nullable',
+			'jugador4' => 'required_if:jugador1,=,null|required_if:jugador2,=,null|required_if:jugador3,=,null|nullable',
 		]);
 
-		//dd($datos);
 
 		Reserva::create([
 
-
+			'id_hace_reserva' => auth()->user()->id,
+			'fecha' => $datos['fecha'],
+			'id_pista' => $datos['pistas'],
+			'id_horario' => $datos['horarios'],
+			'id_nivel' => $datos['niveles'],
+			'id_jugador_1' => $datos['jugador1'],
+			'id_jugador_2' => $datos['jugador2'],
+			'id_jugador_3' => $datos['jugador3'],
+			'id_jugador_4' => $datos['jugador4'],
 
 		]);
 
-		
+		/*$reserva = new Reserva();
+
+		$reserva->id_hace_reserva = auth()->user()->id;
+		$reserva->fecha = $datos['fecha'];
+		$reserva->id_pista = $datos['pistas'];
+		$reserva->id_horario = $datos['horarios'];
+		$reserva->id_nivel = $datos['niveles'];
+		$reserva->id_jugador_1 = $datos['jugador1'];
+		$reserva->id_jugador_2 = $datos['jugador2'];
+		$reserva->id_jugador_3 = $datos['jugador3'];
+		$reserva->id_jugador_4 = $datos['jugador4'];
+		//dd($reserva);
+		$reserva->save();*/
+
+		//dd($reserva);
 
         
         return redirect()->route('reservas.index');
 	}
 
-	public function edit(Reserva $rsv){
+	public function edit(Reserva $reserva){
 
+		//dd($reserva);
+
+		$niveles = Nivel::all();
+
+		$pistas = Pista::all();
+
+		$horarios = Horario::all();
+
+		$jugadores = User::where('id_rol', 3)->get();
+
+		return view('reservas.edit', compact('reserva', 'pistas', 'horarios', 'niveles', 'jugadores'));
 
 	}
 
-	public function update(Reserva $rsv){
+	public function update(Reserva $reserva){
 
+		$datos = request()->validate([
+
+			//'fecha' => 'required',
+			//'pistas' => 'required',
+			//'horarios' => 'required',
+			//'niveles' => 'required',
+			'jugador1' => 'required'/*'required_if:jugador2,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable'*/,
+			'jugador2' => 'required_if:jugador1,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable',
+			'jugador3' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador4,==,null|nullable',
+			'jugador4' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador3,==,null|nullable',
+
+		]);
+
+		//$reserva->fecha = $datos['fecha'];
+		//$reserva->id_pista = $datos['pistas'];
+		//$reserva->id_horario = $datos['horarios'];
+		//$reserva->id_nivel = $datos['niveles'];
+		$reserva->id_jugador_1 = $datos['jugador1'];
+		$reserva->id_jugador_2 = $datos['jugador2'];
+		$reserva->id_jugador_3 = $datos['jugador3'];
+		$reserva->id_jugador_4 = $datos['jugador4'];
+
+		$reserva->update($datos);
+
+		//return redirect()->route('reservas.index');
+		return view('reservas.show', compact('reserva'));
+	}
+
+	public function destroy(Reserva $reserva){
+
+		//dd($reserva);
+
+		$reserva->delete();
+
+		return redirect()->route('reservas.index');
+	}
+
+	public function destroyJug(User $id_jugador, Reserva $id_reserva){
+
+		$reserva = Reserva::find($id_reserva);
+
+		dd($reserva);
+
+		if (condition) {
+			
+			$reserva->id_jugador_1->delete();
+
+		}elseif (condition) {
+		
+			
+			$reserva->id_jugador_2->delete();
+		}elseif (condition) {
+			
+			
+			$reserva->id_jugador_3->delete();
+		}elseif (condition) {
+			
+			
+			$reserva->id_jugador_4->delete();			
+		}
+
+		//return view('reservas.show', compact('reserva'));
 
 	}
 
-	public function destroy(Reserva $rsv){
-
-
-	}
 }

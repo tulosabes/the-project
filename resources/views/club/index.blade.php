@@ -17,12 +17,12 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Email</th>
-				<th>Telefono</th>
+				<th>Teléfono</th>
 				<th>Dirección</th>
 				<th>Población</th>
 				<th>Provincia</th>
 				<th>CP</th>
-				<th>Acciones</th>
+				<th>Editar</th>
 
 			</tr>
 
@@ -37,10 +37,10 @@
 					<td>{{ $cl->email }}</td>
 					<td>{{ $cl->telefono }}</td>
 					<td>{{ $cl->direccion }}</td>
-					<td>{{ $cl->poblacion }}</td>
-					<td>{{ $cl->provincia }}</td>
-					<td>{{ $cl->c_postal }}</td>
-					<td><a href="{{ route('club.edit', $cl) }}" class="btn btn-primary"><span class="oi oi-pencil"></span></a></td>
+					<td>{{ $cl->obtenerPoblacion() }}</td>
+					<td>{{ $cl->obtenerProvincia() }}</td>
+					<td>{{ $cl->obtenerCPostal() }}</td>
+					<td><a href="{{ route('club.edit', $cl) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a></td>
 				</tr>
 			@endforeach
 

@@ -125,7 +125,7 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('/reservas/{reserva}/editar', 'ReservasController@edit')->where('id', '[0-9]+')->name('reservas.edit');
 	Route::put('/reservas/{reserva}', 'ReservasController@update')->where('reserva', '[0-9]+')->name('reservas.update');
 	Route::delete('/reservas/{reserva}', 'ReservasController@destroy')->name('reservas.destroy');
-	Route::get('/reservas', 'ReservasController@index')->name('reservas.index'); 
+	//Route::post('/reservas/{user}', 'ReservasController@destroyJug')->name('reservas.destroyJug');
 
 });
 

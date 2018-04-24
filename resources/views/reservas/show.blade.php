@@ -5,8 +5,9 @@
 @section('content')
 
 	<table class="table table-bordered">
-
+				
 				<h2>Reserva con # {{ $reserva->id }}</h2>
+				<a href="{{ route('reservas.index') }}" class="btn btn-warning">Volver</a>
 			
 				<thead class="table-dark">
 					
@@ -25,8 +26,6 @@
 				</thead>
 
 				<tbody>
-					
-					
 
 						<tr>
 							<td>{{ $reserva->obtenerRol($reserva->id_hace_reserva) }} <br> {{ $reserva->obtenerJugador($reserva->id_hace_reserva) }}</td>
@@ -37,25 +36,41 @@
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_1))
 
-									<p>{{ $reserva->obtenerJugador($reserva->id_jugador_1) }}</p>
+									<p>
+										<a href="{{ route('jugadores.show', $reserva->id_jugador_1) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_1) }}
+										</a>
+										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
+									</p>
 
 								@endif
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_2))
 
-									<p>{{ $reserva->obtenerJugador($reserva->id_jugador_2) }}</p>
+									<p>
+										<a href="{{ route('jugadores.show', $reserva->id_jugador_2) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_2) }}
+										</a>
+										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
+									</p>
 
 								@endif
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_3))
 
-									<p>{{ $reserva->obtenerJugador($reserva->id_jugador_3) }}</p>
+									<p>
+										<a href="{{ route('jugadores.show', $reserva->id_jugador_3) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_3) }}
+										</a>
+										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
+									</p>
 
 								@endif
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_4))
 
-									<p>{{ $reserva->obtenerJugador($reserva->id_jugador_4) }}</p>
+									<p>
+										<a href="{{ route('jugadores.show', $reserva->id_jugador_4) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_4) }}
+										</a>
+										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
+									</p>
 
 								@endif
 

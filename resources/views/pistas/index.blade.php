@@ -20,7 +20,7 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Descripción</th>
-					<th>Disponible</th>
+					<th>Disponibilidad</th>
 					<th>Editar</th>
 				</tr>
 
@@ -35,7 +35,7 @@
 						<td>{{ $pista->descripcion }}</td>
 						<td>{{ $pista->VerDisponibilidad() }}</td>
 						<td>
-							<a href="{{ route('pistas.edit', $pista) }}" class="btn btn-warning"><span class="oi oi-pencil"></span></a>
+							<a href="{{ route('pistas.edit', $pista) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 						</td>
 					</tr>
 

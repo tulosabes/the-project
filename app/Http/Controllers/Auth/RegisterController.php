@@ -53,19 +53,19 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:30',
-            'apellidos' => 'string|max:50',
-            'dni' => ['required', 'min:9','unique:users'],
-            'email' => 'required|string|email|max:255|unique:users',
+            'apellidos' => 'string|max:50|nullable',
+            'fecha_nacimiento' => 'required',
+            'email' => 'required|string|email|max:255|unique:users|confirmed',
             'telefono' => array('required','numeric','unique:users','regex:/^[9|6|7][0-9]{8}$/'),
-            'sexo' => 'required',
-            //'niveles' => 'required|min:1',
-            'direccion' => 'string|max:50',
+            'sexo.*' => 'required|in:hombre,mujer',
+            'direccion' => 'string|max:50|nullable',
             'poblacion' => 'min:1',
             'provincia' => 'min:1',
             'password' => 'required|string|min:6|confirmed',
             'dni' => array('required_if:nif,==,0','unique:users','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'nif' => array('required_if:dni,==,0','unique:users','regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
-            'condiciones' => 'required',
+            //'sin' => 'nullable',
+            'condiciones.*' => 'required|in:ok',
         ]);
     }
 
@@ -77,20 +77,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
+
         return User::create([
             'name' => $data['name'],
             'apellidos' => $data['apellidos'],
             'dni' => $data['dni'],
+            'nif' => $data['nif'],
+            //'sin' => $data['sin'],
+            'fecha_nacimiento' => $data['fecha_nacimiento'],
             'email' => $data['email'],
             'telefono' => $data['telefono'],
             'sexo' => $data['sexo'],
-            //'id_nivel' => $data['niveles'],
             'direccion' => $data['direccion'],
             'id_poblacion' => $data['poblacion'],
             'id_provincia' => $data['provincia'],
             'password' => bcrypt($data['password']),
-            'dni' => $data['nif'],
-            'nif' => $data['dni'],
         ]);
     }
 }

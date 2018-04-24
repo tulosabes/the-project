@@ -1,6 +1,6 @@
 @extends('admin') 
 
-@section('title', 'Perfil administrador $admin->name')
+@section('title', 'Perfil administrador')
 
 @section('content')
 
@@ -20,12 +20,13 @@
 				<th>Apellidos</th>
 				<th>Dni</th>
 				<th>Email</th>
-				<th>Telefono</th>
+				<th>Teléfono</th>
 				<th>Nivel</th>
 				<th>Dirección</th>
 				<th>Población</th>
 				<th>Provincia</th>
-				<th>Acciones</th>
+				<th>CP</th>
+				<th>Editar</th>
 			</tr>
 
 		</thead>
@@ -52,8 +53,9 @@
 				<td>{{ $admin->direccion }}</td>
 				<td>{{ $admin->obtenerPoblacion() }}</td>
 				<td>{{ $admin->obtenerProvincia() }}</td>
+				<td>{{ $admin->obtenerCPostal() }}</td>
 				<td>
-					<a href="{{ route('perfiles.edit', $admin) }}" class="btn btn-warning"><span class="oi oi-pencil"></span></a>
+					<a href="{{ route('perfiles.edit', $admin) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 				</td>
 			</tr>
 

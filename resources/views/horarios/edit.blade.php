@@ -4,7 +4,7 @@
 
 @section('content')
 
-	<div class="card">
+	<div class="card col-sm-12 col-md-10 col-lg-6">
 		
 		<h4 class="card-header">
 			Editar {{ $horario->name }}
@@ -18,7 +18,7 @@
 
 				{!! csrf_field() !!}
 				
-				<div class="form-group">
+				<div class="form-group col-sm-12 col-md-12">
 					
 					<label for="name" class="control-label">Nombre:</label>
 					<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $horario->name) }}">
@@ -31,7 +31,7 @@
 
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-sm-12 col-md-12">
 					
 					<label for="hora" class="control-label">Horarios:</label>
 					<select name="hora" id="hora" class="form-control">
@@ -62,7 +62,7 @@
 
 				</div>
 
-				<button type="submit" class="btn btn-success">Actualizar horario</button>
+				<button type="submit" class="btn btn-primary">Actualizar horario</button>
 				<a href="{{ route('horarios.index') }}" class="btn btn-warning">Volver</a>
 
 			</form>

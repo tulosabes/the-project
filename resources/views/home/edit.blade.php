@@ -226,7 +226,7 @@
 
 				</div>
 
-				<button type="submit" class="btn btn-success">Actualizar jugador</button>
+				<button type="submit" class="btn btn-primary">Actualizar jugador</button>
 				<a href="{{ route('home.index') }}" class="btn btn-warning">Volver</a>
 
 			</form>
