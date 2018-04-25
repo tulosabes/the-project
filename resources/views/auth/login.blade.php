@@ -3,8 +3,8 @@
 @section('title', "Entrar a RP-PADEL")
 
 @section('content')
-
-            <div class="card col-md-4">
+        <div class="row justify-content-center">
+            <div class="card col-sm-12 col-md-8 col-lg-4">
                 <div class="card-header">Entrar</div>
 
                 <div class="card-body">
@@ -80,13 +80,9 @@
                             </div> 
 
                         </div>
-
-                        
-
-                        
-
                     </form>
                 </div>
             </div>
+        </div>
 
 @endsection

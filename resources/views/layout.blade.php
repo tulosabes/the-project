@@ -37,7 +37,7 @@
       
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href=""><img src="{{ asset('images/logoM2.png') }}"></a>
+        <a class="navbar-brand" href=""><img src="{{ asset('images/logoM2.png') }}" class="img-fluid"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -88,21 +88,21 @@
 
         <div class="row mt-3">
 
-          <div class="col-12">
+          <div class="col">
                 
              @yield('content')
 
           </div>
 
-          <div class="col-0">
+          <!--<div class="col-0">
 
             @section('sidebar')
             
-    <!--           <h2>Barra Lateral</h2>-->
+              <h2>Barra Lateral</h2>
             
             @show
 
-          </div>
+          </div>-->
 
         </div>
 
@@ -111,32 +111,7 @@
     @section('footer')
       <footer class="footer fixed-bottom bg-dark">
         <div class="container">
-          <div class="row mt-3">
-            
-            <div class="col-sm-12 col-md-4">
-              
-              <p>RP-PADEL</p>
-
-              <p>Avenida Enric Valor, 15 Pol. Ind. La Cala</p>
-
-              <p>03509 Finestrat (Alicante)</p>
-
-            </div>  
-
-            <div class="col-sm-12 col-md-4">
-              
-
-
-            </div>
-
-            <div class="col-sm-12 col-md-4">
-
-              <a href="">Contacto</a>
-              
-            </div>
-
-
-          </div>
+          
         </div>
       </footer>
     @show

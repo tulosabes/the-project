@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <div class="card col-sm-12 col-md-8">
+    <div class="row justify-content-center">    
+    <div class="card col-sm-12 col-md-8 ">
         <div class="card-header">Registro</div>
 
         <div class="card-body">
@@ -78,7 +79,7 @@
                         
                         <label for="fecha_nacimiento" class="control-label">Fecha de nacimiento;</label>
                         <span class="badge badge-danger">(Mayores de 14 años)</span>
-                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento') }}" max="{{ $date->now()->subYears(14)->formatLocalized('%Y-%m-%d') }}">
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento', date('d-m-Y')) }}" max="{{ $date->now()->subYears(14)->formatLocalized('%Y-%m-%d') }}">
                         
                     </div>
                     
@@ -131,9 +132,15 @@
 
                     <div class="form-group col-sm-12 col-md-12 col-lg-6">
                         
-                        <label for="email-confirm" class="control-label">Confirmar email</label>
-                        <input id="email-confirm" type="email" placeholder="Mayor a 6 carácteres" class="form-control" name="email_confirmation" required>
+                        <label for="email-confirm" class="control-label">Confirmar email:</label>
+                        <input id="email-confirm" type="email" placeholder="Mayor a 6 carácteres" class="form-control" name="email_confirmation">
                 
+                        @if ($errors->has('email-confirm'))
+
+                            <div class="alert alert-danger">{{ $errors->first('email-confirm') }}</div>
+
+                        @endif
+
                     </div>
 
                     <div class="form-group col-sm-12 col-md-12 col-lg-4">
@@ -234,9 +241,15 @@
 
                     <div class="form-group col-sm-12 col-md-6 col-lg-4">
                         
-                        <label for="password-confirm" class="control-label">Confirmar contraseña</label>
-                        <input id="password-confirm" type="password" placeholder="Mayor a 6 carácteres" class="form-control" name="password_confirmation" required>
-                
+                        <label for="password-confirm" class="control-label">Confirmar contraseña:</label>
+                        <input id="password-confirm" type="password" placeholder="Mayor a 6 carácteres" class="form-control" name="password_confirmation">
+                        
+                        @if ($errors->has('password-confirm'))
+
+                            <div class="alert alert-danger">{{ $errors->first('password-confirm') }}</div>
+
+                        @endif
+
                     </div>
 
                 </div>
@@ -283,5 +296,5 @@
             </form>
          </div>
     </div>
-
+    </div>
 @endsection
