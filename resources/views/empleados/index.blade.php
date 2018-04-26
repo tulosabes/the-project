@@ -14,81 +14,82 @@
 
 	@if ($empleados->isNotEmpty())
 
-		<table class="table table-bordered">
-		
-			<thead class="table-dark">
-				
-				<tr>
-					<th>Nombre</th>
-					<th>Apellidos</th>
-					<th>Dni</th>
-					<th>Email</th>
-					<th>Teléfono</th>
-					<th>Nivel</th>
-					<th>Dirección</th>
-					<th>Población</th>
-					<th>Provincia</th>
-					<th>CP</th>
-					<th>Acciones</th>
-
-				</tr>
-
-			</thead>
-
-			<tbody class="table">
-				
-				@foreach ($empleados as $empleado)
-
+		<div class="table-responsive ">
+			<table class="table table-bordered table-striped table-hover">
+			
+				<thead class="table-dark">
+					
 					<tr>
-						<td>{{ ucwords($empleado->name) }}</td>
-						<td>{{ ucwords($empleado->apellidos) }}</td>
-						
-						@if ($empleado->dni === null)
+						<th class="col-sm-1">Nombre</th>
+						<th class="col-sm-1">Apellidos</th>
+						<th class="col-sm-1">Dni</th>
+						<th class="col-sm-1">Email</th>
+						<th class="col-sm-1">Teléfono</th>
+						<th class="col-sm-1">Nivel</th>
+						<th class="col-sm-1">Dirección</th>
+						<th class="col-sm-1">Población</th>
+						<th class="col-sm-1">Provincia</th>
+						<th class="col-sm-1">CP</th>
+						<th class="col-sm-1">Acciones</th>
 
-							<td>{{ $empleado->nif }}</td>
-
-						@else
-
-							<td>{{ $empleado->dni }}</td>
-
-						@endif
-
-						<td>{{ $empleado->email }}</td>
-						<td>{{ $empleado->telefono }}</td>
-						<td>{{ $empleado->obtenerNivel() }}</td>
-						<td>{{ ucwords($empleado->direccion) }}</td>
-						<td>{{ $empleado->obtenerPoblacion() }}</td>
-						<td>{{ $empleado->obtenerProvincia() }}</td>
-						<td>{{ $empleado->obtenerCPostal() }}</td>
-
-						<td>
-							
-							<form action="{{ route('empleados.destroy', $empleado) }}" method="POST">
-
-
-								{!! csrf_field() !!} <!-- proteccion de la insercion de datos de terceros, este toquen mantiene la proteccion activa y es mejor usarlo aqui que quitarlo del archivo Http/Kernel.php la directiva \App\Http\Middleware\VerifyCsrfToken::class valdria con comentarla (siempre dentro del formulario)-->
-
-
-								{{ method_field('DELETE') }} <!--campo oculto para decirle que estamos enviando por DELETE y no por post-->
-
-								<div class="btn-group">
-									
-									<a href="{{ route('empleados.show', $empleado) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-									<a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-									<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-								</div>
-							</form>
-						</td>
 					</tr>
 
-				@endforeach
+				</thead>
 
-			</tbody>
+				<tbody class="table">
+					
+					@foreach ($empleados as $empleado)
 
-		</table>
+						<tr>
+							<td>{{ ucwords($empleado->name) }}</td>
+							<td>{{ ucwords($empleado->apellidos) }}</td>
+							
+							@if ($empleado->dni === null)
 
+								<td>{{ $empleado->nif }}</td>
+
+							@else
+
+								<td>{{ $empleado->dni }}</td>
+
+							@endif
+
+							<td>{{ $empleado->email }}</td>
+							<td>{{ $empleado->telefono }}</td>
+							<td>{{ $empleado->obtenerNivel() }}</td>
+							<td>{{ ucwords($empleado->direccion) }}</td>
+							<td>{{ $empleado->obtenerPoblacion() }}</td>
+							<td>{{ $empleado->obtenerProvincia() }}</td>
+							<td>{{ $empleado->obtenerCPostal() }}</td>
+
+							<td>
+								
+								<form action="{{ route('empleados.destroy', $empleado) }}" method="POST">
+
+
+									{!! csrf_field() !!} <!-- proteccion de la insercion de datos de terceros, este toquen mantiene la proteccion activa y es mejor usarlo aqui que quitarlo del archivo Http/Kernel.php la directiva \App\Http\Middleware\VerifyCsrfToken::class valdria con comentarla (siempre dentro del formulario)-->
+
+
+									{{ method_field('DELETE') }} <!--campo oculto para decirle que estamos enviando por DELETE y no por post-->
+
+									<div class="btn-group">
+										
+										<a href="{{ route('empleados.show', $empleado) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+										<a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+										<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+									</div>
+								</form>
+							</td>
+						</tr>
+
+					@endforeach
+
+				</tbody>
+
+			</table>
+		</div>
 	@else
 
 		<p>No hay empleados registrados</p>

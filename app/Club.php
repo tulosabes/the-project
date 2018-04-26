@@ -14,7 +14,7 @@ class Club extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'telefono', 'poblacion', 'provincia', 'c_postal', 'direccion', 
+        'name', 'email', 'telefono', 'id_poblacion', 'id_provincia', 'direccion', 'id_servicio'
     ];
 
     public function servicio(){

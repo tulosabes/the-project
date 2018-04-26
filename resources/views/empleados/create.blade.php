@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
@@ -280,7 +281,7 @@
 			</form>
 
 		</div>
-
 	</div>
+</div>
 
 @endsection

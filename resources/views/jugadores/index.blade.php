@@ -11,27 +11,26 @@
 		<p><a href="{{ route('jugadores.create') }}" class="btn btn-success">Crear jugador</a></p>
 
 	</div>
-
-	<div class="row">
 		
 		@if ($jugadores->isNotEmpty())
 
-			<table class="table table-bordered">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-hover">
 			
 				<thead class="table-dark">
 					
 					<tr>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th>Dni</th>
-						<th>Email</th>
-						<th>Teléfono</th>
-						<th>Nivel</th>
-						<th>Dirección</th>
-						<th>Población</th>
-						<th>Provincia</th>
-						<th>CP</th>
-						<th>Acciones</th>
+						<th class="col-sm-1">Nombre</th>
+						<th class="col-sm-1">Apellidos</th>
+						<th class="col-sm-1">Dni</th>
+						<th class="col-sm-1">Email</th>
+						<th class="col-sm-1">Teléfono</th>
+						<th class="col-sm-1">Nivel</th>
+						<th class="col-sm-1">Dirección</th>
+						<th class="col-sm-1">Población</th>
+						<th class="col-sm-1">Provincia</th>
+						<th class="col-sm-1">CP</th>
+						<th class="col-sm-1">Acciones</th>
 
 					</tr>
 
@@ -90,12 +89,11 @@
 				</tbody>
 
 			</table>
-					
-		
-					
-					{{ $jugadores->render('pagination::bootstrap-4') }}
+		</div>	
 
-			
+		<div class="row justify-content-center mt-3">
+			{{ $jugadores->render('pagination::bootstrap-4') }}
+		</div>
 
 		@else
 
@@ -103,7 +101,6 @@
 
 		@endif
 
-	</div>
 
 @endsection
 

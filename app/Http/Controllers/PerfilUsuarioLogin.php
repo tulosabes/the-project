@@ -59,6 +59,7 @@ class PerfilUsuarioLogin extends Controller
             ],
             'telefono' => array('required','numeric',Rule::unique('users')->ignore($admin->id),'regex:/^[9|6|7][0-9]{8}$/'),
             'password' => '',
+            'passwrod-confirm' => '',
             'apellidos' => 'nullable|string|max:50',
             'direccion' => 'nullable|string|max:50',
             'poblacion' => 'min:1',
@@ -66,21 +67,6 @@ class PerfilUsuarioLogin extends Controller
             'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($admin->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($admin->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'niveles' => 'required',
-        ],
-        [
-            'name.required' => 'El campo nombre es obligatorio',
-            'dni.required' => 'El campo DNI es obligatiorio',
-            'dni.min' => 'El campo DNI debe contener 8 dígitos y 1 letra',
-            'dni.unique' => 'Este dni ya existe en la base de datos',
-            'email.required' => 'El campo email es obligatorio',
-            'email.email' => 'Tiene que escribir un email correcto (ejemplo@ejemplo.com)',
-            'email.unique' => 'Este email ya existe en la base de datos, introduzca uno diferente',
-            'telefono.required' => 'El campo telefono es obligatorio',
-            'telefono.min' => 'El telefono debe contener 9 dígitos',
-            'telefono.unique' => 'El telefono introducido ya existe en la base de datos',
-            'password.required' => 'El campo password es obligatorio',
-            'password.min' => 'La contraseña debe de tener mas de 6 caracteres',
-            'niveles.required' => 'El campo de nivel es obligatorio',
         ]);
 
 
@@ -94,10 +80,11 @@ class PerfilUsuarioLogin extends Controller
                 'email' => [
                     'required',
                     'email', 
-                    Rule::unique('users')->ignore($admin->id)
+                    Rule::unique('users')->ignore($admin->id),
+                    'confirmed'
                 ],
-                'telefono' => array('required','numeric','unique:users','regex:/^[9|6|7][0-9]{8}$/'),
-                'password' => ['required', 'min:6'],
+                'telefono' => array('required','numeric',Rule::unique('users')->ignore($admin->id),'regex:/^[9|6|7][0-9]{8}$/'),
+                'password' => 'required|string|min:6|confirmed',
                 'apellidos' => 'nullable|string|max:50',
                 'direccion' => 'nullable|string|max:50',
                 'poblacion' => 'min:1',
@@ -105,21 +92,6 @@ class PerfilUsuarioLogin extends Controller
                 'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($admin->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($admin->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'niveles' => 'required',
-            ],
-            [
-                'name.required' => 'El campo nombre es obligatorio',
-                'dni.required' => 'El campo DNI es obligatiorio',
-                'dni.min' => 'El campo DNI debe contener 8 dígitos y 1 letra',
-                'dni.unique' => 'Este dni ya existe en la base de datos',
-                'email.required' => 'El campo email es obligatorio',
-                'email.email' => 'Tiene que escribir un email correcto (ejemplo@ejemplo.com)',
-                'email.unique' => 'Este email ya existe en la base de datos, introduzca uno diferente',
-                'telefono.required' => 'El campo telefono es obligatorio',
-                'telefono.min' => 'El telefono debe contener 9 dígitos',
-                'telefono.unique' => 'El telefono introducido ya existe en la base de datos',
-                'password.required' => 'El campo password es obligatorio',
-                'password.min' => 'La contraseña debe de tener mas de 6 caracteres',
-                'niveles.required' => 'El campo de nivel es obligatorio',
             ]);
 
             $admin->id_poblacion = $data['poblacion'];

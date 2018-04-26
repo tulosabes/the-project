@@ -4,6 +4,8 @@
 
 @section('content')
 
+<div class="row justify-content-center"> 
+
 	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
@@ -216,8 +218,6 @@
                         
                         @foreach($provincias as $pro)
 
-                        	
-
                             @if ($jugador->id_provincia === $pro->id)
 
                         		<option value="{{ $pro->id }}" selected="selected">{{ $pro->provincia }}</option>
@@ -227,8 +227,6 @@
                         		<option value="{{ $pro->id }}">{{ $pro->provincia }}</option>
 
                         	@endif
-
-                                                        
 
                         @endforeach
 
@@ -250,7 +248,6 @@
                         
                         @foreach ($poblaciones as $poblacion)
 
-
                             @if ($jugador->id_poblacion === $poblacion->id)
 
                         		<option value="{{ $poblacion->id }}" selected="selected">{{ $poblacion->poblacion }}</option>
@@ -261,9 +258,7 @@
 
                         	@endif
 
-
                         @endforeach
-
 
                     </select>
 
@@ -315,6 +310,7 @@
 
 			</form>
 		</div>
-
 	</div>
+
+</div>
 @endsection

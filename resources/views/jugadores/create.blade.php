@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
@@ -275,12 +276,12 @@
 				</div>
 
 				<button type="submit" class="btn btn-success">Crear empleado</button>
-				<a href="{{ route('empleados.index') }}" class="btn btn-warning">Volver</a>
+				<a href="{{ route('jugadores.index') }}" class="btn btn-warning">Volver</a>
 
 			</form>
 
 		</div>
 
 	</div>
-
+</div>
 @endsection

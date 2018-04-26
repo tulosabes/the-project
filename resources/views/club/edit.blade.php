@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
@@ -41,7 +42,7 @@
 
 				<div class="row">
 					
-					<div class="form-group col-sm-12 col-md-8 col-lg-6">
+					<div class="form-group col-sm-12 col-md-12 col-lg-6">
 					
 						<label for="email" class="control-label">Correo electrónico:</label>
 						<input type="email" name="email" id="email" placeholder="ejemplo@ejemplo.com" class="form-control" value="{{ old('email' , $club->email) }}"><!-- en value le ponemos el metodo old('nombre_campo') con esto hacemos que se guarde el valor en caso de tener errores en los demas campos-->
@@ -52,6 +53,13 @@
 
 						@endif
 
+					</div>
+
+					<div class="form-group col-sm-12 col-md-12 col-lg-6">
+                        
+						<label for="email-confirm" class="control-label">Confirmar email</label>
+						<input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation">
+					
 					</div>
 
 					<div class="form-group col-sm-12 col-md-4 col-lg-4">
@@ -168,5 +176,6 @@
 		</div>
 
 	</div>
+</div>
 
 @endsection

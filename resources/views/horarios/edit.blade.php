@@ -4,7 +4,8 @@
 
 @section('content')
 
-	<div class="card col-sm-12 col-md-10 col-lg-6">
+<div class="row justify-content-center"> 
+	<div class="card col-sm-12 col-md-6">
 		
 		<h4 class="card-header">
 			Editar {{ $horario->name }}
@@ -66,6 +67,6 @@
 				<a href="{{ route('horarios.index') }}" class="btn btn-warning">Volver</a>
 
 			</form>
-
 	</div>
+</div>
 @endsection

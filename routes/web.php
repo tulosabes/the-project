@@ -45,9 +45,10 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('/perfil/{user}', 'PerfilUsuarioLogin@show')->name('perfiles.show');
 
 	Route::get('/club', 'ClubController@index')->name('club.index');
-	Route::get('/club/{club}', 'ClubController@show')->name('club.show');
 	Route::get('/club/{club}/editar', 'ClubController@edit')->name('club.edit');
 	Route::put('/club/{club}', 'ClubController@update')->name('club.update');
+	Route::get('/club/{club}', 'ClubController@show')->name('club.show');
+	
 
 	// nueva ruta llamada usuario
 	Route::get('/empleados', 'EmpleadosController@index')->name('empleados.index'); // CON NAME LO QUE HACEMOS ES DARLE UN MOBRE A LA RUTA PARA LUEGO LLAMARLA DESDE UN ENLACE

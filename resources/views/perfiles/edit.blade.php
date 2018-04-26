@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
 		<h4 class="card-header">
@@ -89,7 +90,7 @@
 
 				<div class="row">
 					
-					<div class="form-group col-sm-12 col-md-8 col-lg-6">
+					<div class="form-group col-sm-12 col-md-12 col-lg-6">
 					
 						<label for="email" class="control-label">Correo electrónico:</label>
 						<input type="email" name="email" id="email" placeholder="ejemplo@ejemplo.com" class="form-control" value="{{ old('email' , $admin->email) }}"><!-- en value le ponemos el metodo old('nombre_campo') con esto hacemos que se guarde el valor en caso de tener errores en los demas campos-->
@@ -102,7 +103,20 @@
 
 					</div>
 
-					<div class="form-group col-sm-12 col-md-4 col-lg-4">
+					<div class="form-group col-sm-12 col-md-12 col-lg-6">
+                        
+                        <label for="email-confirm" class="control-label">Confirmar email:</label>
+                        <input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation" value="{{ old('email-confirm') }}">
+                
+                        @if ($errors->has('email-confirm'))
+
+                            <div class="alert alert-danger">{{ $errors->first('email-confirm') }}</div>
+
+                        @endif
+
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12 col-lg-4">
 						
 						<label for="telefono" class="control-label">Teléfono:</label>
 						<input type="text" name="telefono" id="telefono" placeholder="666777888" class="form-control"  value="{{ old('telefono', $admin->telefono) }}">
@@ -152,88 +166,86 @@
 				</div>
 
 				<div class="row">
-					
-					<div class="form-group col-sm-12 col-md-12 col-lg-10">
-					
-						<label for="direccion" class="control-label">Dirección:</label>
-						<input type="text" name="direccion" id="direccion" placeholder="" class="form-control" value="{{ old('direccion', $admin->direccion) }}">
+                    
+                    <div class="form-group col-sm-12 col-md-12 col-lg-4">
+                    
+                        <label for="direccion" class="control-label">Dirección:</label>
+                        <input type="text" name="direccion" id="direccion" placeholder="" class="form-control" value="{{ old('direccion') }}">
 
-						@if ($errors->has('direccion'))
+                        @if ($errors->has('direccion'))
 
-							<div class="alert alert-danger">{{ $errors->first('direccion') }}</div>
+                            <div class="alert alert-danger">{{ $errors->first('direccion') }}</div>
 
-						@endif
+                        @endif
 
-					</div>
+                    </div>
 
-					<div class="from-group col-sm-12 col-md-4 col-lg-4">
-	                    
-	                    <label for="provincia" class="control-label">Provincia:</label>
-	                    <select name="provincia" id="provincia" class="form-control">
-	                        
-	                        @foreach($provincias as $pro)
+                    <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                        
+                        <label for="provincia" class="control-label">Provincia:</label>
+                        <select name="provincia" id="provincia" class="form-control">
+                            
+                            <option value="">Elija una provincia</option>
 
-	                        	
+                            @foreach($provincias as $pro)
 
-	                            @if ($admin->id_provincia === $pro->id)
+								@if ($admin->id_provincia === $pro->id)
 
-	                        		<option value="{{ $pro->id }}" selected="selected">{{ $pro->provincia }}</option>
+									<option value="{{ $pro->id }}" selected="selected">{{ $pro->provincia }}</option>
 
-	                        	@else
+								@else
 
-	                        		<option value="{{ $pro->id }}">{{ $pro->provincia }}</option>
+									<option value="{{ $pro->id }}">{{ $pro->provincia }}</option>
 
-	                        	@endif
+								@endif
 
-	                                                        
+                            @endforeach
 
-	                        @endforeach
+                        </select>
 
-	                    </select>
+                        @if ($errors->has('provincia'))
 
-	                    @if ($errors->has('provincia'))
+                            <div class="alert alert-danger">{{ $errors->first('provincia') }}</div>
 
-	                        <div class="alert alert-danger">{{ $errors->first('provincia') }}</div>
-
-	                    @endif
+                        @endif
 
 
-	                </div>
+                    </div>
 
-	                <div class="from-group col-sm-12 col-md-4 col-lg-4">
-	                    
-	                    <label for="poblacion" class="control-label">Población:</label>
-	                    <select name="poblacion" id="poblacion" class="form-control">
-	                        
-	                        @foreach ($poblaciones as $poblacion)
+                    <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                        
+                        <label for="poblacion" class="control-label">Población:</label>
+                        <select name="poblacion" id="poblacion" class="form-control">
+                            
+                            <option value="">Elija una poblacion</option>
 
+                            @foreach ($poblaciones as $poblacion)
 
-	                            @if ($admin->id_poblacion === $poblacion->id)
+								@if ($admin->id_poblacion === $poblacion->id)
 
-	                        		<option value="{{ $poblacion->id }}" selected="selected">{{ $poblacion->poblacion }}</option>
+									<option value="{{ $poblacion->id }}" selected="selected">{{ $poblacion->poblacion }}</option>
 
-	                        	@else
+								@else
 
-	                        		<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
+									<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
 
-	                        	@endif
+								@endif
 
-
-	                        @endforeach
-
-
-	                    </select>
-
-	                    @if ($errors->has('poblacion'))
-
-	                        <div class="alert alert-danger">{{ $errors->first('poblacion') }}</div>
-
-	                    @endif
+                            @endforeach
 
 
-	                </div>
+                        </select>
 
-				</div>
+                        @if ($errors->has('poblacion'))
+
+                            <div class="alert alert-danger">{{ $errors->first('poblacion') }}</div>
+
+                        @endif
+
+
+                    </div>
+
+                </div>
 
 				<div class="row">
 					
@@ -250,12 +262,29 @@
 
 					</div>
 
+					<div class="form-group col-sm-12 col-md-6 col-lg-4">
+                        
+                        <label for="password-confirm" class="control-label">Confirmar contraseña:</label>
+                        <input id="password-confirm" type="password" placeholder="Mayor a 6 carácteres" class="form-control" name="password_confirmation value="{{ old('email-confirm') }}"">
+                        
+                        @if ($errors->has('password-confirm'))
+
+                            <div class="alert alert-danger">{{ $errors->first('password-confirm') }}</div>
+
+                        @endif
+
+                    </div>
+
 				</div>
 
 				<div class="row">
 					
-					<button type="submit" class="btn btn-primary">Actualizar administrador</button>
-					<a href="{{ route('perfiles.index') }}" class="btn btn-warning">Volver</a>
+					<div class="form-group ">
+
+						<button type="submit" class="btn btn-primary">Actualizar administrador</button>
+						<a href="{{ route('perfiles.index') }}" class="btn btn-warning">Volver</a>
+
+					</div>
 
 				</div>
 
@@ -264,6 +293,5 @@
 		</div>
 
 	</div>
-
-
+</div>
 @endsection

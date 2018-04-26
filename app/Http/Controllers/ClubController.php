@@ -47,27 +47,17 @@ class ClubController extends Controller
     	$data = request()->validate([
 
     		'name' => 'required|max:20',
-    		'email' => 'required|email',
-    		'telefono' => 'required|numeric|max:999999999',
+    		'email' => ['required','email','confirmed'], 
+    		'telefono' => array('required','numeric','regex:/^[9|6|7][0-9]{8}$/'),
     		'direccion' => 'required|max:50',
-    		'poblacion' => 'required|max:20',
-    		'provincia' => 'required|max:20',
-    		'c_postal' => 'required|numeric|max:99999',
-    	],
-    	[
-    		'name.required' => 'El campo nombre es obligatorio',
-    		'email.required' => 'El campo correo elecotronico es obligatorio',
-    		'email.email' => 'Tiene que escribir un email correcto (ejemplo@ejemplo.com)',
-    		'telefono.required' => 'El campo telefono es obligatorio',
-    		'telefono.numeric' => 'El valor del campo tiene que ser numerico',
-    		'direccion.required' => 'El campo direccion es obligatorio',
-    		'poblacion.required' => 'El campo poblacion es obligatorio',
-    		'provincia.required' => 'El campo provincia es obligatorio',
-    		'c_postal.required' => 'El campo codigo postal es obligatorio',
-
+    		'poblacion' => 'min:1',
+            'provincia' => 'min:1',
     	]);
 
-    	//dd($club);
+		//dd($club);
+		
+		$club->id_poblacion = $data['poblacion'];
+        $club->id_provincia = $data['provincia']; 
 
     	$club->update($data);
 

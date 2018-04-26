@@ -4,52 +4,61 @@
 
 @section('content')
 
-	<div class="d-flex justify-content-between align-items-end mb-3">
-		
-		<h1 class="pb-2">{{ $title }}</h1>
+<div class="row justify-content-center">
 
-		<!--<p><a href="{{ route('jugadores.create') }}" class="btn btn-primary">Crear jugador</a></p>-->
+	<div class=" col-sm-12 col-md-12 col-lg-6">
 
-	</div>
-
-		@if ($horarios->isNotEmpty())
-
-		<table class="table table-bordered">
+		<div class="d-flex justify-content-between align-items-end mb-3">
 			
-			<thead class="table-dark">
-				<tr>
-					<th>Nombre</th>
-					<th>Hora</th>
-					<th>Duración</th>
-					<th>Editar</th>
-				</tr>
+			<h1 class="pb-2">{{ $title }}</h1>
 
-			</thead>
+			<!--<p><a href="{{ route('jugadores.create') }}" class="btn btn-primary">Crear jugador</a></p>-->
 
-			<tbody class="table">
+		</div>
+
+			@if ($horarios->isNotEmpty())
+
+			<div class="table-responsive">
+
+				<table class="table table-bordered table-striped table-hover">
 				
-				@foreach ($horarios as $horario)
+					<thead class="table-dark">
+						<tr>
+							<th class="3">Nombre</th>
+							<th class="3">Hora</th>
+							<th class="3">Duración</th>
+							<th class="3">Editar</th>
+						</tr>
 
-					<tr>
-						<td>{{ $horario->name }}</td>
-						<td>{{ $horario->hora }}</td>
-						<td>{{ $horario->duracion }}</td>
-						<td>
-							<a href="{{ route('horarios.edit', $horario) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-						</td>
-					</tr>
+					</thead>
 
-				@endforeach
+					<tbody class="table">
+						
+						@foreach ($horarios as $horario)
 
-			</tbody>
+							<tr>
+								<td>{{ $horario->name }}</td>
+								<td>{{ $horario->hora }}</td>
+								<td>{{ $horario->duracion }}</td>
+								<td>
+									<a href="{{ route('horarios.edit', $horario) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+								</td>
+							</tr>
 
-		</table>
+						@endforeach
 
-	@else
+					</tbody>
 
-		<p>No hay horarios registradas</p>
+				</table>
+			</div>
 
-	@endif
+		@else
+
+			<p>No hay horarios registradas</p>
+
+		@endif
+	</div>
+</div>
 
 @endsection
 
