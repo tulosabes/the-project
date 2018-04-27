@@ -1,14 +1,14 @@
 @extends('home') 
 
-@section('title', 'Perfil jugador $jugador->name')
+@section('title', 'Perfil jugador')
 
 @section('content')
 
-	<div class="d-flex justify-content-between align-items-end mb-3">
+	<!--<div class="d-flex justify-content-between align-items-end mb-3">
 		
-		<h1 class="pb-2">{{ $title }}</h1>
+		<h1 class="pb-2">Perfil del jugador {{  $jugador->name }}</h1>
 
-	</div>
+	</div>-->
 
 	
 	<div class="table-responsive ">

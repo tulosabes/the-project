@@ -4,31 +4,37 @@
 
 @section('content')
 
-	<table class="table table-bordered">
-				
-				<h2>Reserva con # {{ $reserva->id }}</h2>
-				<a href="{{ route('reservas.index') }}" class="btn btn-warning">Volver</a>
+
+	<div class="d-flex justify-content-between align-items-end mb-3">
+		
+		<h2>Reserva {{ $reserva->id }}</h2>
+		<a href="{{ route('reservas.index') }}" class="btn btn-warning">Volver</a>
+
+	</div>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-hover">
 			
 				<thead class="table-dark">
 					
 					<tr>
-						<th>Hace la reserva</th>
-						<th>Pista</th>
-						<th>Horario</th>
-						<th>Jugadores</th>
-						<th>Nivel</th>
-						<th>fecha</th>
-						<th>Huecos disponibles</th>
-						<th>Acciones</th>
+						<th class="col-sm-2">Reserva la pista</th>
+						<th class="col-sm-1">Pista</th>
+						<th class="col-sm-1">Horario</th>
+						<th class="col-sm-3">Jugadores</th>
+						<th class="col-sm-1">Nivel</th>
+						<th class="col-sm-1">fecha</th>
+						<th class="col-sm-2">Huecos disponibles</th>
+						<th class="col-sm-1">Acciones</th>
 
 					</tr>
 
 				</thead>
 
-				<tbody>
+				<tbody class="table">
 
 						<tr>
-							<td>{{ $reserva->obtenerRol($reserva->id_hace_reserva) }} <br> {{ $reserva->obtenerJugador($reserva->id_hace_reserva) }}</td>
+							<td>{{ $reserva->obtenerRol($reserva->id_hace_reserva) }}  {{ $reserva->obtenerJugador($reserva->id_hace_reserva) }}</td>
 							<td>{{ $reserva->obtenerPista() }}</td>
 							<td>{{ $reserva->obtenerHorario() }}</td>
 
@@ -107,19 +113,16 @@
 
 									<div class="btn-group">
 										
-										<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-warning"><span class="oi oi-pencil"></span></a>
+										<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 
-										<button type="submit" class="btn btn-danger"><span class="oi oi-trash"></span></button>
+										<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
 
 									</div>
 								</form>
 							</td>
 						</tr>
-
-					
-
 				</tbody>
-
 			</table>
+		</div>
 
 @endsection

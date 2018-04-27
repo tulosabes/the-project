@@ -18,7 +18,7 @@
 
     @section('navLiDer')
 
-        <li class="nav-item"><a href="" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
+        <li class="nav-item"><a href="{{ route('perfiles.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
 
         <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Salir</a>
@@ -70,7 +70,7 @@
 
     @section('navLiDer')
 
-        <li class="nav-item active"><a href="" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
+        <li class="nav-item active"><a href="{{ route('perfiles.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
 
         <li class="nav-item active">
             <a href="{{ route('logout') }}" class="nav-link btn btn-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Salir</a>

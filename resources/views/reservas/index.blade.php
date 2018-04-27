@@ -68,7 +68,7 @@
 
 											@foreach($horarios as $horario)
 
-												<p>
+												<p class="">
 													<span class="btn-group"><span class="btn btn-primary">{{ substr($horario->hora, 0 , -3) }}</span>
 
 														@foreach($reservas as $reserva)
@@ -80,7 +80,7 @@
 																	<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																	<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																	<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
 
 
 																		{!! csrf_field() !!} 
@@ -102,7 +102,7 @@
 																@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
 																	<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
-																	<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																	<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
 
 
 																		{!! csrf_field() !!} 
@@ -136,7 +136,6 @@
 
 												</p>
 											
-												<hr/>
 											@endforeach
 
 										@else
