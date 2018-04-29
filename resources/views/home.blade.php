@@ -53,42 +53,42 @@
 
     @section('footer')
 
-        <footer class="footer fixed-bottom bg-dark">
-            <div class="container">
-            
-                <div class="row">
+    <footer class="footer fixed-bottom bg-dark">
+        <div class="container">
+          
+            <div class="row">
 
-                    <div class="col-sm-12 col-md-4 text-center">
-                        
-                        <p>{{ $club->name }}</p>
-
-                        <p>{{ $club->direccion }}</p>
-
-                        <p>{{ $club->obtenerCPostal() }} {{ $club->obtenerPoblacion() }} {{ $club->obtenerProvincia() }}</p>
-
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 text-center">
-                        <p>
-                            <a href="">
-                                Contacto
-                            </a>
-                        </p>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 text-center">
-
-                        <p><small>Copyright © 2018 {{ $club->name }}</small></p>
-
-                        <p><small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small></p>
-
-                    </div>
+                <div class="col-sm-12 col-md-4 text-center">
                     
+                <small>{{ $club->name }}</small><br>
+
+                <small>{{ $club->direccion }}</small><br>
+
+                <small>{{ $club->obtenerCPostal() }} {{ $club->obtenerPoblacion() }} {{ $club->obtenerProvincia() }}</small><br>  
 
                 </div>
 
+                <div class="col-sm-12 col-md-4 text-center">
+                    <p class="mt-3">
+                        <a href="">
+                            <small>Contacto</small>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-sm-12 col-md-4 text-center">
+
+                    <small>Copyright © 2018 {{ $club->name }}</small><br>
+
+                    <small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small>
+
+                </div>
+                
+
             </div>
-        </footer>
+
+        </div>
+      </footer>
 
     @endsection
     

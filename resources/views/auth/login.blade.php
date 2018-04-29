@@ -96,29 +96,27 @@
 
                 <div class="col-sm-12 col-md-4 text-center">
                     
-                    <p><small>{{ $club->name }}</small></p>
+                <small>{{ $club->name }}</small><br>
 
-                    <p><small>{{ $club->direccion }}</small></p>
+                <small>{{ $club->direccion }}</small><br>
 
-                    <p><small>{{ $club->obtenerCPostal() }} {{ $club->obtenerPoblacion() }} {{ $club->obtenerProvincia() }}</small></p>
+                <small>{{ $club->obtenerCPostal() }} {{ $club->obtenerPoblacion() }} {{ $club->obtenerProvincia() }}</small><br>  
 
                 </div>
 
                 <div class="col-sm-12 col-md-4 text-center">
-                    <p>
-                        <small>
-                            <a href="">
-                                Contacto
-                            </a>
-                        </small>
+                    <p class="mt-3">
+                        <a href="">
+                            <small>Contacto</small>
+                        </a>
                     </p>
                 </div>
 
                 <div class="col-sm-12 col-md-4 text-center">
 
-                    <p><small>Copyright © 2018 {{ $club->name }}</small></p>
+                    <small>Copyright © 2018 {{ $club->name }}</small><br>
 
-                    <p><small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small></p>
+                    <small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small>
 
                 </div>
                 
