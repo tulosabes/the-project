@@ -28,7 +28,7 @@
                 <div class="col-sm-12 col-md-4 text-center">
                     <p class="mt-3">
                         <a href="">
-                            <small>Contacto</small>
+                            <small class="letraColor">Contacto</small>
                         </a>
                     </p>
                 </div>

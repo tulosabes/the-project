@@ -60,6 +60,15 @@ body > .container {
   
 }
 
+.letraColor{
+
+  color: #0376ab;
+}
+
+.fondoColor{
+
+  background-color: #0376ab;
+}
 
 code {
   font-size: 80%;
