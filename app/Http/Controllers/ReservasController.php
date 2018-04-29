@@ -39,14 +39,7 @@ class ReservasController extends Controller
 
 		$reservasCompletas = Reserva::where('id_jugador_1', '!=', null)->where('id_jugador_2', '!=', null)->where('id_jugador_3', '!=', null)->where('id_jugador_4', '!=', null)->orderBy('fecha', 'asc')->get();
 
-
-		$date = Carbon::now(); // para darle formato español a la fecha
-
-
-
-		//dd($date->formatLocalized('%A %d'));
-
-		//dd($reservasCompletas);
+		$date = Carbon::now(); 
 
 		return view('reservas.index', compact('title', 'reservas', 'reservasCompletas', 'reservasIncompletas', 'pistas', 'horarios' , 'date', 'club'));
 
@@ -65,8 +58,6 @@ class ReservasController extends Controller
 		$datos = request()->all();
 
 		//dd($datos['horario']);
-
-		//dd($jugadores);
 
 		if (isset($datos['reserva'])) {
 			
@@ -94,12 +85,13 @@ class ReservasController extends Controller
 			'pistas' => 'required',
 			'horarios' => 'required',
 			'niveles' => 'required',
-			'jugador1' => 'required_if:jugador2,=,null|required_if:jugador3,=,null|required_if:jugador4,=,null|nullable',
-			'jugador2' => 'required_if:jugador1,=,null|required_if:jugador3,=,null|required_if:jugador4,=,null|nullable',
-			'jugador3' => 'required_if:jugador1,=,null|required_if:jugador2,=,null|required_if:jugador4,=,null|nullable',
-			'jugador4' => 'required_if:jugador1,=,null|required_if:jugador2,=,null|required_if:jugador3,=,null|nullable',
+			'jugador1' => 'required_without_all:jugador2,jugador3,jugador4',
+			'jugador2' => 'required_without_all:jugador1,jugador3,jugador4',
+			'jugador3' => 'required_without_all:jugador1,jugador2,jugador4',
+			'jugador4' => 'required_without_all:jugador1,jugador2,jugador3'								
 		]);
 
+		//dd($datos);
 
 		Reserva::create([
 
@@ -114,23 +106,6 @@ class ReservasController extends Controller
 			'id_jugador_4' => $datos['jugador4'],
 
 		]);
-
-		/*$reserva = new Reserva();
-
-		$reserva->id_hace_reserva = auth()->user()->id;
-		$reserva->fecha = $datos['fecha'];
-		$reserva->id_pista = $datos['pistas'];
-		$reserva->id_horario = $datos['horarios'];
-		$reserva->id_nivel = $datos['niveles'];
-		$reserva->id_jugador_1 = $datos['jugador1'];
-		$reserva->id_jugador_2 = $datos['jugador2'];
-		$reserva->id_jugador_3 = $datos['jugador3'];
-		$reserva->id_jugador_4 = $datos['jugador4'];
-		//dd($reserva);
-		$reserva->save();*/
-
-		//dd($reserva);
-
         
         return redirect()->route('reservas.index');
 	}
@@ -158,18 +133,20 @@ class ReservasController extends Controller
 			//'fecha' => 'required',
 			//'pistas' => 'required',
 			//'horarios' => 'required',
-			//'niveles' => 'required',
-			'jugador1' => 'required'/*'required_if:jugador2,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable'*/,
-			'jugador2' => 'required_if:jugador1,==,null|required_if:jugador3,==,null|required_if:jugador4,==,null|nullable',
-			'jugador3' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador4,==,null|nullable',
-			'jugador4' => 'required_if:jugador1,==,null|required_if:jugador2,==,null|required_if:jugador3,==,null|nullable',
+			'niveles' => 'required',
+			'jugador1' => 'required_without_all:jugador2,jugador3,jugador4',
+			'jugador2' => 'required_without_all:jugador1,jugador3,jugador4',
+			'jugador3' => 'required_without_all:jugador1,jugador2,jugador4',
+			'jugador4' => 'required_without_all:jugador1,jugador2,jugador3'	
 
 		]);
+
+		//dd($datos);
 
 		//$reserva->fecha = $datos['fecha'];
 		//$reserva->id_pista = $datos['pistas'];
 		//$reserva->id_horario = $datos['horarios'];
-		//$reserva->id_nivel = $datos['niveles'];
+		$reserva->id_nivel = $datos['niveles'];
 		$reserva->id_jugador_1 = $datos['jugador1'];
 		$reserva->id_jugador_2 = $datos['jugador2'];
 		$reserva->id_jugador_3 = $datos['jugador3'];

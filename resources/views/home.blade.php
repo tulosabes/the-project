@@ -4,8 +4,8 @@
 
     @section('navLiIzq')
 
-        <li class="nav-item active"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-        <li class="nav-item active"><a class="nav-link" href="{{ route('home.show',Auth::user() ) }}">Perfil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('home.show',Auth::user() ) }}">Perfil</a></li>
         
         <li class="nav-item dropdown bg-dark">
             
@@ -27,22 +27,10 @@
 
     @section('navLiDer')
 
-        <li class="nav-item active"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
+        <li class="nav-item"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
 
-        <li class="nav-item active">
-            <a href="{{ route('logout') }}" class="nav-link btn btn-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                 {{ csrf_field() }}
-            </form>
-        </li>
-
-    @endsection
-
-    @section('navLiDer')
-
-        <li class="nav-item active">
-            <a href="{{ route('logout') }}" class="nav-link btn btn-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+        <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Salir</a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                  {{ csrf_field() }}
@@ -58,7 +46,46 @@
 
         <h1>Beinvenido al HOME del jugador</h1>
 
+    @endsection
 
+    @section('footer')
+
+        <footer class="footer fixed-bottom bg-dark">
+            <div class="container">
+            
+                <div class="row">
+
+                    <div class="col-sm-12 col-md-4 text-center">
+                        
+                        <p>{{ $club->name }}</p>
+
+                        <p>{{ $club->direccion }}</p>
+
+                        <p>{{ $club->obtenerCPostal() }} {{ $club->obtenerPoblacion() }} {{ $club->obtenerProvincia() }}</p>
+
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 text-center">
+                        <p>
+                            <a href="">
+                                Contacto
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 text-center">
+
+                        <p><small>Copyright © 2018 {{ $club->name }}</small></p>
+
+                        <p><small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small></p>
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+        </footer>
 
     @endsection
     

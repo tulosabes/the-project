@@ -111,12 +111,13 @@ class JugadoresController extends Controller
 
             'name' => 'required|string|max:20', // campo cual debe de ser requerido
             //'dni' => ['required', 'min:9','unique:users,dni'],
-            'email' => [
+            /*'email' => [
                 'required',
                 'email', 
                 Rule::unique('users')->ignore($jugador->id),
                 'confirmed'
-            ],
+            ]*/
+            'email' => '', 
             'telefono' => array('required','numeric',Rule::unique('users')->ignore($jugador->id),'regex:/^[9|6|7][0-9]{8}$/'),
             'password' => '',
             'sexo' => 'required',

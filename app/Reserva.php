@@ -14,7 +14,7 @@ class Reserva extends Model
 {
     protected $table = 'reservas';
 
-    protected $fillable = ['id_hace:reserva', 'id_horario','id_pista','id_jugador_1','id_jugador_2','id_jugador_3','id_jugador_4','id_nivel','fecha'];
+    protected $fillable = ['id_hace_reserva', 'id_horario','id_pista','id_jugador_1','id_jugador_2','id_jugador_3','id_jugador_4','id_nivel','fecha'];
 
 	public function users(){
 

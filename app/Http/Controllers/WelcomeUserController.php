@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Club;
+use App\User;
+
 class WelcomeUserController extends Controller
 {
 	// metodo "__invoke" hace que este controlador solo tenga una accion, se ejecuta directamente, no hace falta que le pongamos la @metodo delante del metodo  'WelcomerUserController' anteriormente lo hariamos 'WelcomeUserController@nombre_metodo'
@@ -21,7 +24,16 @@ class WelcomeUserController extends Controller
 
 			return "Bienvenido {$name}";
 		}
-    }*/
+	}*/
+	
+	public function index(){
+
+		$club = Club::first();
+
+		$admin = User::where('id_rol','=',1)->first();
+        
+        return view('welcome', compact('club', 'admin'));
+	}
 
     public function name($name){
 

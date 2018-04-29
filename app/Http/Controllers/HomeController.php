@@ -8,6 +8,7 @@ use App\User;
 use App\Provincia;
 use App\Poblacion;
 use App\Nivel;
+use App\Club;
 
 use Carbon\Carbon;
 
@@ -28,19 +29,20 @@ class HomeController extends Controller
 
     public function index(){
 
-        $title = 'Bienvenido a tu perfil de usuario';
+        $club = Club::first();
 
-        $jugador = auth()->user();
-
-        $date = Carbon::now();
-
-        return view('home.index', compact('title', 'jugador','date'));
- 
+        $admin = User::where('id_rol','=',1)->first();
+        
+        return view('home', compact('club','admin'));
     }
 
     public function show(User $jugador){
 
-        return view('home.show', compact('jugador'));
+        $club = Club::first();
+
+		$admin = User::where('id_rol','=',1)->first();
+
+        return view('home.show', compact('jugador','club','admin'));
     }
 
     public function edit(User $jugador){
@@ -130,9 +132,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexJugadores(User $user)
+    public function indexJugadores()
     {
-        return view('home', compact('user'));
+
+        $title = 'Bienvenido a tu perfil de usuario';
+
+        $jugador = auth()->user();
+
+        $date = Carbon::now();
+
+        return view('home.indexJugadores', compact('title', 'jugador','date'));
+
+        
     }
 
     /**
@@ -140,9 +151,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexAdmin(User $user)
+    public function indexAdmin()
     {
-        return view('admin', compact('user'));
+        return view('admin');
     }
 
     /**

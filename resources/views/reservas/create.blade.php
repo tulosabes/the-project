@@ -4,7 +4,8 @@
 
 @section('content')
 
-	<div class="card col-sm-12 col-md-10 col-lg-10">
+<div class="row justify-content-center"> 
+	<div class="card col-sm-12 col-md-10">
 		
 		<h4 class="card-header">
 			Crear reserva
@@ -126,7 +127,7 @@
 	                    <label for="jugador1" class="control-label">Jugador 1:</label>
 	                    <select name="jugador1" id="jugador1" class="form-control">
 	                        
-	                        <option value="">Jugador nº 1</option>
+	                        <option value="" class="">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -165,7 +166,7 @@
 	                    <label for="jugador2" class="control-label">Jugador 2:</label>
 	                    <select name="jugador2" id="jugador2" class="form-control">
 	                        
-	                        <option value="">Jugador nº 2</option>
+	                        <option value="" class="">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -203,7 +204,7 @@
 	                    <label for="jugador3" class="control-label">Jugador 3:</label>
 	                    <select name="jugador3" id="jugador3" class="form-control">
 	                        
-	                        <option value="">Jugador nº 3</option>
+	                        <option value="" class="">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -241,7 +242,7 @@
 	                    <label for="jugador4" class="control-label">Jugador 4:</label>
 	                    <select name="jugador4" id="jugador4" class="form-control">
 	                        
-	                        <option value="">Jugador nº 4</option>
+	                        <option value="" class="">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -267,7 +268,7 @@
 
 	                    @if ($errors->has('jugador4'))
 
-	                        <div class="alert alert-danger">{{ $errors->first('jugador2') }}</div>
+	                        <div class="alert alert-danger">{{ $errors->first('jugador4') }}</div>
 
 	                    @endif
 
@@ -286,5 +287,7 @@
 		</div>
 
 	</div>
+
+</div>
 
 @endsection

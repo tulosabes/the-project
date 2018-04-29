@@ -94,7 +94,7 @@
                     
                         <div class="form-check">
 
-                            <input type="radio" name="sexo" class="form-check-input" value="hombre" id="hombre">                    
+                            <input type="radio" name="sexo" class="form-check-input" value="hombre" id="hombre" checked>                    
                             <label for="hombre" class="form-check-label">Hombre</label>
                             
                              @if ($errors->has('sexo'))
@@ -140,7 +140,7 @@
 					<div class="form-group col-sm-12 col-md-12 col-lg-6">
                         
                         <label for="email-confirm" class="control-label">Confirmar email</label>
-                        <input id="email-confirm" type="email" placeholder="Mayor a 6 carácteres" class="form-control" name="email_confirmation">
+                        <input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation">
                 
                     </div>
 

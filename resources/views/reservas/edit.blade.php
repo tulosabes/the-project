@@ -9,7 +9,7 @@
 	<div class="card col-sm-12 col-md-12 col-lg-10">
 		
 		<h4 class="card-header">
-			Crear reserva
+			Editar reserva {{ $reserva->id }}
 		</h4>
 
 		<div class="card-body">
@@ -138,7 +138,7 @@
 	                    <label for="jugador1" class="control-label">Jugador 1:</label>
 	                    <select name="jugador1" id="jugador1" class="form-control">
 	                        
-	                        <option value="">Hueco libre</option>
+	                        <option value="" class="bg-danger">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -177,7 +177,7 @@
 	                    <label for="jugador2" class="control-label">Jugador 2:</label>
 	                    <select name="jugador2" id="jugador2" class="form-control">
 	                        
-	                        <option value="">Hueco libre</option>
+	                        <option value="" class="bg-danger">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -215,7 +215,7 @@
 	                    <label for="jugador3" class="control-label">Jugador 3:</label>
 	                    <select name="jugador3" id="jugador3" class="form-control">
 	                        
-	                        <option value="">Hueco libre</option>
+	                        <option value="" class="bg-danger">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 
@@ -253,7 +253,7 @@
 	                    <label for="jugador4" class="control-label">Jugador 4:</label>
 	                    <select name="jugador4" id="jugador4" class="form-control">
 	                        
-	                        <option value="">Hueco libre</option>
+	                        <option value="" class="bg-danger">Sin jugador</option>
 
 	                        @foreach($jugadores as $jug)
 

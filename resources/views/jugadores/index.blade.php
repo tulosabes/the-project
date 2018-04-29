@@ -26,7 +26,7 @@
 						<th class="col-sm-1">Email</th>
 						<th class="col-sm-1">Teléfono</th>
 						<th class="col-sm-1">Nivel</th>
-						<th class="col-sm-1">Dirección</th>
+						<th class="col-sm-2">Dirección</th>
 						<th class="col-sm-1">Población</th>
 						<th class="col-sm-1">Provincia</th>
 						<th class="col-sm-1">CP</th>

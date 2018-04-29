@@ -26,10 +26,7 @@ Route::get('/', function () {
 
 // podemos definir las rutas que queramos
 // una ruta nueva que devuelve un texto, el cual sera mostrado en la pantalla del navegador
-Route::get('/', function(){
-
-	return view('welcome');
-})->name('welcome');
+Route::get('/', 'WelcomeUserController@index')->name('welcome');
 
 
 Route::group(['prefix' => 'admin'], function(){
@@ -177,9 +174,9 @@ Route::group(['prefix' => 'admin'], function(){
 
 Route::group(['prefix' => 'home'], function() {
     
-    Route::get('/', 'HomeController@indexJugadores')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 	
-	Route::get('/perfil', 'HomeController@index')->name('home.index');
+	Route::get('/perfil', 'HomeController@indexJugadores')->name('home.indexJugadores');
 	Route::get('/perfil/{jugador}/editar' , 'HomeController@edit')->name('home.edit');
 	Route::put('/perfil/{jugador}', 'HomeController@update')->name('home.update');
 	Route::get('/perfil/{jugador}', 'HomeController@show')->name('home.show');

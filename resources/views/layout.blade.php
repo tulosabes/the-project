@@ -42,31 +42,31 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav col-md-7">
+          <ul class="navbar-nav col-md-8">
 
             @yield('navLiIzq')
 
-            <!--<li class="nav-item active">
-              <a class="nav-link" href="{{ asset('/admin') }}">empleados <span class="sr-only">(current)</span></a>
-            </li>-->
-            <!--<li class="nav-item">
-              <a class="nav-link" href="{{ asset('/empleados/100') }}">Mostrar</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="">Club <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('/empleados/100/edit') }}">Editar</a>
+              <a class="nav-link" href="">Servicios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('/empleados/nuevo') }}">Crear</a>
-            </li>-->
+              <a class="nav-link" href="">Reservas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Contacto</a>
+            </li>
           </ul>
 
-          <ul class="navbar-nav col-md-5">
+          <ul class="navbar-nav col-md-4">
 
             @yield('navLiDer')
 
             @section('loginRegister')
 
-              <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
+              <li class="nav-item  ml-auto"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
               <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Registrarse</a></li>
 
             @show
@@ -86,7 +86,7 @@
 
         <!-- la directiva "yield('content') lo que hace "-->
 
-        <div class="row mt-3">
+        <div class="row mr-1 ml-1">
 
           <div class="col">
                 
@@ -109,11 +109,7 @@
     </main>
 
     @section('footer')
-      <footer class="footer fixed-bottom bg-dark">
-        <div class="container">
-          
-        </div>
-      </footer>
+      
     @show
     
     

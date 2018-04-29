@@ -94,7 +94,7 @@
                     
                         <div class="form-check">
 
-                            <input type="radio" name="sexo" class="form-check-input" value="hombre" id="hombre">                    
+                            <input type="radio" name="sexo" class="form-check-input" value="hombre" id="hombre" checked>                    
                             <label for="hombre" class="form-check-label">Hombre</label>
                             
                              @if ($errors->has('sexo'))
