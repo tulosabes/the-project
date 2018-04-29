@@ -161,9 +161,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexEmpleados(User $user)
+    public function indexEmpleados()
     {
-        return view('empleado', compact('user'));
+        return view('empleado');
     }
 
 

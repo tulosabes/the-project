@@ -11,7 +11,7 @@
 		<div class="btn-group">
 			
 			<span class="btn btn-danger" id="completas">Completa <span class="badge badge-light">0</span></span>
-			<span class="btn btn-warning">Huecos disponibles <span class="badge badge-light">2</span></span>
+			<span class="btn btn-warning">Huecos disponibles <span class="badge badge-light">1</span> <span class="badge badge-light">2</span> <span class="badge badge-light">3</span></span>
 			<span class="btn btn-primary">Pista libre <span class="badge badge-light">4</span></span>
 
 		</div>

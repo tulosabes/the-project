@@ -35,6 +35,8 @@
 
                 <div class="col-sm-12 col-md-4 text-center">
 
+                    <p></p>
+
                     <p><small>Copyright © 2018 {{ $club->name }}</small></p>
 
                     <p><small>Web diseñada por {{ ucwords($admin->name) }} {{ ucwords($admin->apellidos) }}</small></p>

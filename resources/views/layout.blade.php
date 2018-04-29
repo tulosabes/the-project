@@ -44,20 +44,56 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav col-md-8">
 
-            @yield('navLiIzq')
+            @section('nav')
+              <li class="nav-item active">
+                  <a class="nav-link" href="{{ route('welcome') }}"><span class="oi oi-home"></span> Home <span class="sr-only">(current)</span></a>
+                </li>
+            
+    
+                <li class="nav-item dropdown bg-dark">
+                
+                    <a class="nav-link dropdown-toggle" data-toggle='dropdown' href=""><span class="oi oi-target"></span> Club</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href=""><span class="oi oi-info"></span> Servicios</a>
+                        <a class="dropdown-item" href=""><span class="oi oi-layers"></span> Reservas</a>                
+                    </div>
+        
+                </li>
+    
+                <li class="nav-item">
+                  <a class="nav-link" href=""><span class="oi oi-phone"></span> Contacto</a>
+                </li>
+              </ul>
+            @show
 
-            <li class="nav-item active">
-              <a class="nav-link" href="">Club <span class="sr-only">(current)</span></a>
+
+            @yield('navLiIzq')
+           <!-- <li class="nav-item active">
+              <a class="nav-link" href="{{ route('welcome') }}"><span class="oi oi-home"></span> Home <span class="sr-only">(current)</span></a>
+            </li>
+           <li class="nav-item active">
+              <a class="nav-link" href=""><span class="oi oi-home"></span> Club</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Servicios</a>
+              <a class="nav-link" href=""><span class="oi oi-service"></span> Servicios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Reservas</a>
+              <a class="nav-link" href=""><span class="oi oi-layers"></span> Reservas</a>
             </li>
+
+            <li class="nav-item dropdown bg-dark">
+            
+                <a class="nav-link dropdown-toggle" data-toggle='dropdown' href=""><span class="oi oi-target"></span> Club</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href=""><span class="oi oi-info"></span> Servicios</a>
+                    <a class="dropdown-item" href=""><span class="oi oi-layers"></span> Reservas</a>                
+                </div>
+    
+            </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="">Contacto</a>
-            </li>
+              <a class="nav-link" href=""><span class="oi oi-phone"></span> Contacto</a>
+            </li>-->
           </ul>
 
           <ul class="navbar-nav col-md-4">
@@ -66,8 +102,8 @@
 
             @section('loginRegister')
 
-              <li class="nav-item  ml-auto"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
-              <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Registrarse</a></li>
+              <li class="nav-item  ml-auto"><a href="{{ route('login') }}" class="nav-link" class="iconic-md"><span class="oi oi-account-login"></span> Entrar</a></li>
+              <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"><span class="oi oi-aperture"></span> Registrarse</a></li>
 
             @show
 

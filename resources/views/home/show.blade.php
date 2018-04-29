@@ -6,7 +6,7 @@
 
 	<div class="d-flex justify-content-between align-items-end mb-3">
 		
-		<h1 class="pb-2">Tu perfil {{  $jugador->name }}</h1>
+		<h1 class="pb-2">Mi perfil {{  $jugador->name }}</h1>
 
 	</div>
 

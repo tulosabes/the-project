@@ -2,14 +2,17 @@
 
 @section('title', "Bienvenido a RP-PADEL")
 
+    @section('nav')
+    @stop
+
     @section('navLiIzq')
 
-        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('home.show',Auth::user() ) }}">Perfil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><span class="oi oi-home"></span> Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('home.show',Auth::user() ) }}"><span class="oi oi-person"></span> Perfil</a></li>
         
         <li class="nav-item dropdown bg-dark">
             
-            <a class="nav-link dropdown-toggle" data-toggle='dropdown' href="">Reservas</a>
+            <a class="nav-link dropdown-toggle" data-toggle='dropdown' href=""><span class="oi oi-layers"></span> Reservas</a>
         
             <div class="dropdown-menu">
 
@@ -27,10 +30,10 @@
 
     @section('navLiDer')
 
-        <li class="nav-item"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ Auth::user()->name }}!!!</a></li>
+        <li class="nav-item"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ ucwords(Auth::user()->name) }}!!!</a></li>
 
         <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Salir</a>
+            <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="oi oi-account-logout"></span> Salir</a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                  {{ csrf_field() }}
