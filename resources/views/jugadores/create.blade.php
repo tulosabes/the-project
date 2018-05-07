@@ -2,12 +2,16 @@
 
 @section('title', "Crear jugador")
 
+@section('script')
+	<script src="{{ asset('js/scriptJugadores.js') }}"></script> 
+@endsection
+
 @section('content')
 
 <div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
-		<h4 class="card-header">
+		<h4 class="card-header letraColor">
 			Crear jugador
 		</h4>
 
@@ -54,14 +58,14 @@
 					
 					<div class="form-group col-sm-12 col-md-6 col-lg-4">
 					
-						<label for="dnis" class="control-label">Tipo de documento:</label>
-						<select id="dnis" name="dnis" class="form-control">
-							
-							<option value="sin">Sin documento</option>
-							<option value="nifs">NIF</option>
-							<option value="nie">NIE</option>
+						<label for="documento" class="control-label">Tipo de documento:</label>
+                        <select id="documento" name="documento" class="form-control">
+                            
+                            <option value="sin">Sin documento</option>  
+                            <option value="nif">DNI</option>
+                            <option value="nie">NIE</option>                          
 
-						</select>
+                        </select>
 
 
 						<input type="text" name="dni" id="dni" placeholder="48300300w" class="form-control"  value="{{ old('dni') }}">
@@ -205,7 +209,7 @@
 	                    <label for="provincia" class="control-label">Provincia:</label>
 	                    <select name="provincia" id="provincia" class="form-control">
 	                        
-	                        <option value="">Elija una provincia</option>
+	                        <option value="0" id="optionProvinciaCreate">Elija una provincia</option>
 
 	                        @foreach($provincias as $pro)
 
@@ -229,13 +233,7 @@
 	                    <label for="poblacion" class="control-label">Población:</label>
 	                    <select name="poblacion" id="poblacion" class="form-control">
 	                        
-	                        <option value="">Elija una poblacion</option>
-
-	                        @foreach ($poblaciones as $poblacion)
-
-								<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
-
-	                        @endforeach
+	                        <option value="0" id="optionPoblacion">Elija una poblacion</option>
 
 
 	                    </select>

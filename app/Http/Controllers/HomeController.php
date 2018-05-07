@@ -27,6 +27,15 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    // ruta privada para traer los jugadores a las reservas
+    public function jugadores($id_nivel){
+
+        $jugadores = User::where('id_nivel', $id_nivel)->get();
+
+        return response()->json($jugadores);
+        
+    }
+
     public function index(){
 
         $club = Club::first();
@@ -167,9 +176,7 @@ class HomeController extends Controller
     }
 
 
-
     
-
 
 
 

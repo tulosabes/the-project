@@ -42,9 +42,11 @@
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_1))
 
-									<p>
-										<a href="{{ route('jugadores.show', $reserva->id_jugador_1) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_1) }}
+									<p class='d-flex justify-content-between align-items-end mb-3'>
+										<a class="letraColor" href="{{ route('jugadores.show', $reserva->id_jugador_1) }}">
+											{{ $reserva->obtenerJugador($reserva->id_jugador_1) }} 
 										</a>
+										<span class="btn btn-outline-dark btn-sm"> (Telf: {{ $reserva->obtenerTelfJugador($reserva->id_jugador_1) }})</span>
 										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
 									</p>
 
@@ -52,9 +54,11 @@
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_2))
 
-									<p>
-										<a href="{{ route('jugadores.show', $reserva->id_jugador_2) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_2) }}
+									<p class='d-flex justify-content-between align-items-end mb-3'>
+										<a class="letraColor" href="{{ route('jugadores.show', $reserva->id_jugador_2) }}">
+											{{ $reserva->obtenerJugador($reserva->id_jugador_2) }} 
 										</a>
+										<span class="btn btn-outline-dark btn-sm"> (Telf: {{ $reserva->obtenerTelfJugador($reserva->id_jugador_2) }})</span>
 										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
 									</p>
 
@@ -62,9 +66,11 @@
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_3))
 
-									<p>
-										<a href="{{ route('jugadores.show', $reserva->id_jugador_3) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_3) }}
+									<p class='d-flex justify-content-between align-items-end mb-3'>
+										<a class="letraColor" href="{{ route('jugadores.show', $reserva->id_jugador_3) }}">
+											{{ $reserva->obtenerJugador($reserva->id_jugador_3) }} 
 										</a>
+										<span class="btn btn-outline-dark btn-sm"> (Telf: {{ $reserva->obtenerTelfJugador($reserva->id_jugador_3) }})</span>
 										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
 									</p>
 
@@ -72,9 +78,11 @@
 
 								@if ($reserva->obtenerJugador($reserva->id_jugador_4))
 
-									<p>
-										<a href="{{ route('jugadores.show', $reserva->id_jugador_4) }}">{{ $reserva->obtenerJugador($reserva->id_jugador_4) }}
+									<p class='d-flex justify-content-between align-items-end mb-3'>
+										<a class="letraColor" href="{{ route('jugadores.show', $reserva->id_jugador_4) }}">
+											{{ $reserva->obtenerJugador($reserva->id_jugador_4) }} 
 										</a>
+										<span class="btn btn-outline-dark btn-sm"> (Telf: {{ $reserva->obtenerTelfJugador($reserva->id_jugador_4) }})</span>
 										<!--<a href="" class="btn btn-warning"><span class="oi oi-trash"></span></a>-->
 									</p>
 
@@ -82,27 +90,27 @@
 
 							</td>
 
-							<td>{{ $reserva->obtenerNivel($reserva->id_hace_reserva) }}</td>
+							<td>{{ $reserva->obtenerNivelReserva() }}</td>
 
 							<td>{{ $reserva->formatoFecha($reserva->id) }}</td>
 
 							@if($reserva->contarNumeroJugadores() == 0)
 
-								<td><a class="btn btn-danger">Completa <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
+								<td class="text-center"><a class="btn btn-danger">Completa <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
 
 							@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
 
-								<td><a class="btn btn-warning">Huecos libres <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
+								<td class="text-center"><a class="btn btn-warning">Huecos libres <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
 
 							@else
 
-								<td><a class="btn btn-primary">Libre <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
+								<td class="text-center"><a class="btn btn-primary">Libre <span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></a></td>
 
 							@endif
 				
 							
 
-							<td>
+							<td class="text-center">
 								
 								<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 

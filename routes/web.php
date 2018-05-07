@@ -28,6 +28,12 @@ Route::get('/', function () {
 // una ruta nueva que devuelve un texto, el cual sera mostrado en la pantalla del navegador
 Route::get('/', 'WelcomeUserController@index')->name('welcome');
 
+// rutas para traer datos PUBLICAS
+Route::get('/poblaciones/{id}', 'WelcomeUserController@poblaciones')->name('poblaciones');
+
+
+// rutas para traer datos PRIVADAS
+Route::get('/jugadores/{id}', 'HomeController@jugadores')->name('jugadores');
 
 Route::group(['prefix' => 'admin'], function(){
 
@@ -84,7 +90,7 @@ Route::group(['prefix' => 'admin'], function(){
 	// ruta para hacer el update del usuario
 	Route::put('/empleados/{empleado}', 'EmpleadosController@update')->where('empleado', '[0-9]+')->name('empleados.update');
 	// routa para borrar
-	Route::delete('/empleados/{empleado}', 'EmpleadosController@destroy')->name('empleados.destroy');
+	Route::delete('/empleados/{id}', 'EmpleadosController@destroy')->name('empleados.destroy');
 	// nueva ruta llamada usuario
 	Route::get('/empleados', 'EmpleadosController@index')->name('empleados.index'); // CON NAME LO QUE HACEMOS ES DARLE UN MOBRE A LA RUTA PARA LUEGO LLAMARLA DESDE UN ENLACE
 

@@ -40,7 +40,7 @@
 								<td>{{ $horario->name }}</td>
 								<td>{{ $horario->hora }}</td>
 								<td>{{ $horario->duracion }}</td>
-								<td>
+								<td class="text-center">
 									<a href="{{ route('horarios.edit', $horario) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 								</td>
 							</tr>

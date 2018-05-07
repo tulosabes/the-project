@@ -34,7 +34,7 @@ class EmpleadosController extends Controller
         //$users = DB::table('users')->get(); // de esta manera obtenemos un obejeto con las propiedades/campos que tenemos en la DB
 
         // 2º forma de coger datos de una tabla eloquent
-        $empleados = User::all()->where('id_rol', 2); // de esta manera obtenemos un objeto de eloquent con mucha mas informacion
+        $empleados = User::where('id_rol', 2)->paginate(10); // de esta manera obtenemos un objeto de eloquent con mucha mas informacion
 
         //dd($empleados);
 
@@ -55,13 +55,11 @@ class EmpleadosController extends Controller
 
         $provincias = Provincia::orderBy('provincia', 'asc')->get();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
-
         $date = Carbon::now();
 
         $niveles = Nivel::all();
         
-        return view('empleados.create', ['niveles' => $niveles,'provincias' => $provincias, 'poblaciones' => $poblaciones, 'date' => $date]);
+        return view('empleados.create', ['niveles' => $niveles,'provincias' => $provincias, 'date' => $date]);
     }
 
     public function store(){
@@ -79,8 +77,12 @@ class EmpleadosController extends Controller
             'telefono' => array('required','numeric','unique:users','regex:/^[9|6|7][0-9]{8}$/'),
             'password' => 'required|string|min:6|confirmed',
             'niveles' => 'required|min:1',
-            'poblacion' => 'min:1',
-            'provincia' => 'min:1',
+            'poblacion' => 'numeric|min:1',
+            'provincia' => 'numeric|min:1',
+        ],
+        [
+            'poblacion.min' => 'Tiene que elegir una población',
+            'provincia.min' => 'Tiene que elegir una provincia'
         ]);
 
         User::create([
@@ -111,7 +113,7 @@ class EmpleadosController extends Controller
 
         $provincias = Provincia::orderBy('provincia', 'asc')->get();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
+        $poblaciones = Poblacion::where('id_provincia', $empleado->id_provincia)->orderBy('poblacion', 'asc')->get();
 
         $date = Carbon::now();
 
@@ -137,14 +139,18 @@ class EmpleadosController extends Controller
             'sexo' => 'required',
             'apellidos' => 'nullable|string|max:50',
             'direccion' => 'nullable|string|max:50',
-            'poblacion' => 'min:1',
-            'provincia' => 'min:1',
+            
             'niveles' => 'required|min:1',
             'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($empleado->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($empleado->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'niveles' => 'required',
+            'poblacion' => 'numeric|min:1',
+            'provincia' => 'numeric|min:1',
+        ],
+        [
+            'poblacion.min' => 'Tiene que elegir una población',
+            'provincia.min' => 'Tiene que elegir una provincia'
         ]);
-
 
 
         if ($data['password'] != null) {
@@ -164,12 +170,17 @@ class EmpleadosController extends Controller
                 'sexo' => 'required',
                 'apellidos' => 'nullable|string|max:50',
                 'direccion' => 'nullable|string|max:50',
-                'poblacion' => 'min:1',
-                'provincia' => 'min:1',
+                
                 'niveles' => 'required|min:1',
                 'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($empleado->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($empleado->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'niveles' => 'required',
+                'poblacion' => 'numeric|min:1',
+                'provincia' => 'numeric|min:1',
+            ],
+            [
+                'poblacion.min' => 'Tiene que elegir una población',
+                'provincia.min' => 'Tiene que elegir una provincia'
             ]);
 
             $empleado->id_poblacion = $data['poblacion'];
@@ -189,11 +200,28 @@ class EmpleadosController extends Controller
         return redirect()->route('empleados.show', ['user' => $empleado]);
     }
 
-    public function destroy(User $empleado){
+    public function destroy(Request $request,$id_empleado){
 
-        $empleado->delete();
+        //dd($empleado);
 
-        return redirect()->route('empleados.index');
+        //$this->user->delete();
+
+        if($request->ajax()){
+
+            $empleado = User::find($id_empleado);
+
+            $msn = ['nombre' => 'El empleado ' . $empleado->name . ' fue eliminado'];
+
+            $empleado->delete();
+
+            return $msn;
+        
+        }else{
+
+            $msn = ['nombre' => 'La petición no a tenido efecto'];
+
+            return $msn;
+        }
     }
 
 

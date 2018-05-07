@@ -39,7 +39,8 @@ class LoginController extends Controller
 
         }else{
 
-            return '/';
+
+            return View::make('login');
 
         }
 

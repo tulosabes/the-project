@@ -33,13 +33,12 @@ class PerfilUsuarioLogin extends Controller
 
 	public function edit(User $admin){
 
-		$provincias = Provincia::orderBy('provincia', 'asc')->get();
+        $admin = auth()->user();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
+		$provincias = Provincia::orderBy('provincia', 'asc')->get();
+        $poblaciones = Poblacion::where('id_provincia', $admin->id_provincia)->get();
 
         $niveles = Nivel::all();
-
-        $admin = auth()->user();
         
         return view('perfiles.edit', ['admin' => $admin ,'niveles' => $niveles,'provincias' => $provincias, 'poblaciones' => $poblaciones]);
 	}
@@ -55,7 +54,8 @@ class PerfilUsuarioLogin extends Controller
             'email' => [
                 'required',
                 'email', 
-                Rule::unique('users')->ignore($admin->id)
+                Rule::unique('users')->ignore($admin->id),
+                'confirmed'
             ],
             'telefono' => array('required','numeric',Rule::unique('users')->ignore($admin->id),'regex:/^[9|6|7][0-9]{8}$/'),
             'password' => '',

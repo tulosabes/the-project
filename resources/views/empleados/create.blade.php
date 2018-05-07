@@ -2,12 +2,16 @@
 
 @section('title', "Crear empleados")
 
+@section('script')
+	<script src="{{ asset('js/scriptEmpleados.js') }}"></script> 
+@endsection
+
 @section('content')
 
 <div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
-		<h4 class="card-header">
+		<h4 class="card-header letraColor">
 			Crear empleado
 		</h4>
 
@@ -54,14 +58,14 @@
 					
 					<div class="form-group col-sm-12 col-md-4 col-lg-4">
 					
-						<label for="dnis" class="control-label">Tipo de documento:</label>
-						<select id="dnis" name="dnis" class="form-control">
-							
-							<option value="sin">Sin documento</option>
-							<option value="nifs">NIF</option>
-							<option value="nie">NIE</option>
+						<label for="documento" class="control-label">Tipo de documento:</label>
+                        <select id="documento" name="documento" class="form-control">
+                            
+                            <option value="sin">Sin documento</option>  
+                            <option value="nif">DNI</option>
+                            <option value="nie">NIE</option>                          
 
-						</select>
+                        </select>
 
 
 						<input type="text" name="dni" id="dni" placeholder="48300300w" class="form-control"  value="{{ old('dni') }}">
@@ -85,8 +89,8 @@
 					<div class="form-group col-sm-12 col-md-4 col-lg-4">
                         
                         <label for="fecha_nacimiento" class="control-label">Fecha de nacimiento;</label>
-                        <span class="badge badge-danger">(Mayores de 14 años)</span>
                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento') }}" max="{{ $date->now()->subYears(14)->formatLocalized('%Y-%m-%d') }}">
+                        <span class="badge badge-danger">(Mayores de 14 años)</span>
                         
                     </div>
 
@@ -202,10 +206,10 @@
 
 					<div class="form-group col-sm-12 col-md-6 col-lg-4">
 	                    
-	                    <label for="provincia" class="control-label">Provincia:</label>
-	                    <select name="provincia" id="provincia" class="form-control">
+	                    <label for="provinciaCreate" class="control-label">Provincia:</label>
+	                    <select name="provinciaCreate" id="provinciaCreate" class="form-control">
 	                        
-	                        <option value="">Elija una provincia</option>
+	                        <option value="0" id="optionProvinciaCreate">Elija una provincia</option>
 
 	                        @foreach($provincias as $pro)
 
@@ -215,9 +219,9 @@
 
 	                    </select>
 
-	                    @if ($errors->has('provincia'))
+	                    @if ($errors->has('provinciaCreate'))
 
-	                        <div class="alert alert-danger">{{ $errors->first('provincia') }}</div>
+	                        <div class="alert alert-danger">{{ $errors->first('provinciaCreate') }}</div>
 
 	                    @endif
 
@@ -229,13 +233,7 @@
 	                    <label for="poblacion" class="control-label">Población:</label>
 	                    <select name="poblacion" id="poblacion" class="form-control">
 	                        
-	                        <option value="">Elija una poblacion</option>
-
-	                        @foreach ($poblaciones as $poblacion)
-
-								<option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
-
-	                        @endforeach
+	                        <option value="0" id="optionPoblacion">Elija una poblacion</option>
 
 
 	                    </select>

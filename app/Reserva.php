@@ -96,6 +96,24 @@ class Reserva extends Model
 
     }
 
+    public function obtenerTelfJugador($id){
+
+        $user = User::find($id);
+
+        $libre = true;
+
+    	if($user == null){
+
+            $libre = false;
+
+            return $libre;
+        
+        }else{
+
+            return $user->telefono;
+        }
+    }
+
 
     public function obtenerNameJugadores($id){
 
@@ -126,12 +144,21 @@ class Reserva extends Model
 
     }
 
+    // nivel de usuario
     public function obtenerNivel($id){
 
         $user = User::find($id);
 
         return $user->obtenerNivel();
 
+    }
+
+    //nivel reserva
+    public function obtenerNivelReserva(){
+
+        $nivel = Nivel::find($this->id_nivel);
+
+        return $nivel->nivel;
     }
 
     public function formatoFecha($id){

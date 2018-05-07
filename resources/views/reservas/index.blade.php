@@ -23,866 +23,999 @@
 		<div class="col-sm-12">
 			
 			<ul class="nav nav-tabs bg-dark" role='tablist'>
-				<li class="nav-item"><a class="nav-link active" id="dia1-tab" data-toggle='tab' href="#dia1" role='tab' arial-controls='dia1' aria-selected='true'>{{ ucwords($date->now()->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia2-tab" data-toggle='tab' href="#dia2" role='tab' arial-controls='dia2' aria-selected='false'>{{ ucwords($date->now()->addDay(1)->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia3-tab" data-toggle='tab' href="#dia3" role='tab' arial-controls='dia3' aria-selected='false'>{{ ucwords($date->now()->addDay(2)->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia4-tab" data-toggle='tab' href="#dia4" role='tab' arial-controls='dia4' aria-selected='false'>{{ ucwords($date->now()->addDay(3)->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia5-tab" data-toggle='tab' href="#dia5" role='tab' arial-controls='dia5' aria-selected='false'>{{ ucwords($date->now()->addDay(4)->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia6-tab" data-toggle='tab' href="#dia6" role='tab' arial-controls='dia6' aria-selected='false'>{{ ucwords($date->now()->addDay(5)->formatLocalized('%A %d')) }}</a></li>
-				<li class="nav-item"><a class="nav-link" id="dia7-tab" data-toggle='tab' href="#dia7" role='tab' arial-controls='dia7' aria-selected='false'>{{ ucwords($date->now()->addDay(6)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor active" id="dia1-tab" data-toggle='tab' href="#dia1" role='tab' arial-controls='dia1' aria-selected='true'>{{ ucwords($date->now()->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia2-tab" data-toggle='tab' href="#dia2" role='tab' arial-controls='dia2' aria-selected='false'>{{ ucwords($date->now()->addDay(1)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia3-tab" data-toggle='tab' href="#dia3" role='tab' arial-controls='dia3' aria-selected='false'>{{ ucwords($date->now()->addDay(2)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia4-tab" data-toggle='tab' href="#dia4" role='tab' arial-controls='dia4' aria-selected='false'>{{ ucwords($date->now()->addDay(3)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia5-tab" data-toggle='tab' href="#dia5" role='tab' arial-controls='dia5' aria-selected='false'>{{ ucwords($date->now()->addDay(4)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia6-tab" data-toggle='tab' href="#dia6" role='tab' arial-controls='dia6' aria-selected='false'>{{ ucwords($date->now()->addDay(5)->formatLocalized('%A %d')) }}</a></li>
+				<li class="nav-item"><a class="nav-link letraColor" id="dia7-tab" data-toggle='tab' href="#dia7" role='tab' arial-controls='dia7' aria-selected='false'>{{ ucwords($date->now()->addDay(6)->formatLocalized('%A %d')) }}</a></li>
 			</ul>
 
-			<div class="tab-content bg-dark">
-				
+			<div class="tab-content fondoColor">
+
 				<div class="tab-pane fade show active" id="dia1"  role='tabpanel' arial-labelledby='dia1-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+					
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+		
+							<h3>Hora y pista a elegir</h3>
+	
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->formatLocalized('%A %d- %B -%Y')) }}</p>
 							
-							<thead class="table-dark">
-										
-								<tr>
+						</div>
+	
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+								
+								<thead class="table-dark">
+											
+									<tr>
+													
+										@foreach($pistas as $pista)
+	
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
 												
-									@foreach($pistas as $pista)
-
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
-
-								</tr>
-
-							</thead>
-
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											
-											@if($pista->verDisponibilidad() == 'Disponible')
-
-												@foreach($horarios as $horario)
-
-													<p class="">
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
-
-															@foreach($reservas as $reserva)
-
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->formatLocalized('%Y-%m-%d'))
-
-																	@if($reserva->contarNumeroJugadores() == 0)
-
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-
+										@endforeach
+	
+									</tr>
+	
+								</thead>
+	
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												
+												@if($pista->verDisponibilidad() == 'Disponible')
+	
+													@foreach($horarios as $horario)
+	
+														<p class="">
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+	
+																@foreach($reservas as $reserva)
+	
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->formatLocalized('%Y-%m-%d'))
+	
+																		@if($reserva->contarNumeroJugadores() == 0)
+	
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+	
+	
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
+	
+	
+																				{!! csrf_field() !!} 
+	
+																				{{ method_field('DELETE') }} 
+	
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+	
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+	
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+	
+																				</div>
+																			</form>
+																			
+	
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+	
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST" class="">
+	
+	
+																				{!! csrf_field() !!} 
+	
+																				{{ method_field('DELETE') }} 
+	
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+	
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+	
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+	
+																				</div>
+																			</form>
+	
+																		@endif
+	
 																	@endif
-
+	
+																@endforeach
+	
+																@if($horario->obtenerReserva($pista->id,$date->now()->formatLocalized('%Y-%m-%d')) == false)
+	
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+	
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+	
 																@endif
-
-															@endforeach
-
-															@if($horario->obtenerReserva($pista->id,$date->now()->formatLocalized('%Y-%m-%d')) == false)
-
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
-
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
-
-															@endif
-
-													</p>
+	
+														</p>
+													
+													@endforeach
+	
+												@else
+	
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
+	
+												@endif
+															
+											</td>
+										@endforeach
+									</tr>
 												
-												@endforeach
-
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-														
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+								</tbody>
+	
+							</table>
+						</div>	
+					
+					@endif
 				</div>
 		
 				<div class="tab-pane fade" id="dia2" role='tabpanel' arial-labelledby='dia2-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(1)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(1)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(1)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+			
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(1)->formatLocalized('%A %d- %B -%Y')) }}</p>
 									
-							<thead class="table-dark">
-											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
 
-											@if($pista->verDisponibilidad() == 'Disponible')
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(1)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(1)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(1)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(1)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
 
-															@endforeach
+														</p>
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(1)->formatLocalized('%Y-%m-%d')) == false)
+													@endforeach
+												
+												@else
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(1)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+												@endif
 
-															@endif
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-													</p>
-
-												@endforeach
-											
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>
 				
 				<div class="tab-pane fade" id="dia3" role='tabpanel' arial-labelledby='dia3-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(2)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(2)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(2)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
-									
-							<thead class="table-dark">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+					
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(2)->formatLocalized('%A %d- %B -%Y')) }}</p>
 											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											@if($pista->verDisponibilidad() == 'Disponible')
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(2)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(2)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(2)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(2)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
 
-															@endforeach
+														</p>
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(2)->formatLocalized('%Y-%m-%d')) == false)
+													@endforeach
+												
+												@else
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(2)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+												@endif
 
-															@endif
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-													</p>
-
-												@endforeach
-											
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>		
 				
 				<div class="tab-pane fade" id="dia4" role='tabpanel' arial-labelledby='dia4-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(3)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(3)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(3)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
-									
-							<thead class="table-dark">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+					
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(3)->formatLocalized('%A %d- %B -%Y')) }}</p>
 											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											@if($pista->verDisponibilidad() == 'Disponible')
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(3)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(3)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(3)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(3)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
 
-															@endforeach
+														</p>
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(3)->formatLocalized('%Y-%m-%d')) == false)
+													@endforeach
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+												@else
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(3)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-															@endif
+												@endif
+															
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-													</p>
-
-												@endforeach
-
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-														
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>
 				
 				<div class="tab-pane fade" id="dia5" role='tabpanel' arial-labelledby='dia5-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(4)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(4)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(4)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
-									
-							<thead class="table-dark">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+					
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+					
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(4)->formatLocalized('%A %d- %B -%Y')) }}</p>
 											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											@if($pista->verDisponibilidad() == 'Disponible')
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(4)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(4)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(4)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(4)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
+														</p>
 
-															@endforeach
+													@endforeach
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(4)->formatLocalized('%Y-%m-%d')) == false)
+												@else
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(4)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+												@endif
+															
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-															@endif
-													</p>
-
-												@endforeach
-
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-														
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>
 				
 				<div class="tab-pane fade" id="dia6" role='tabpanel' arial-labelledby='dia6-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(5)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(5)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(5)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
-									
-							<thead class="table-dark">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+					
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(5)->formatLocalized('%A %d- %B -%Y')) }}</p>
 											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											@if($pista->verDisponibilidad() == 'Disponible')
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(5)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(5)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(5)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(5)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
 
-															@endforeach
+														</p>
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(5)->formatLocalized('%Y-%m-%d')) == false)
+													@endforeach
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+												@else
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(5)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-															@endif
+												@endif
+															
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-													</p>
-
-												@endforeach
-
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-														
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>
 
 				<div class="tab-pane fade" id="dia7" role='tabpanel' arial-labelledby='dia7-tab'>
 					
-					<h3>Hora y pista a elegir</h3>
+					@if(ucwords($date->now()->addDay(6)->formatLocalized('%A')) == 'Domingo')
+					
+						<div class="alert alert-danger">
 
-					<p>{{ ucwords($date->now()->addDay(6)->formatLocalized('%A %d- %B -%Y')) }}</p>
+							<p>
+								<h3>{{ $club->obtenerServicioName(7) }}</h3>
+								<small>{{ ucwords($date->now()->addDay(6)->formatLocalized('%A %d- %B -%Y')) }}</small>
+							</p>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover">
-									
-							<thead class="table-dark">
+							<p>{{ $club->obtenerServicioDescrip(7) }}</p>					
+
+						</div>
+					@else
+
+						<div class="d-flex justify-content-between align-items-end mb-4 p-1">
+			
+							<h3>Hora y pista a elegir</h3>
+					
+							<p class="alert alert-dark letraColor">{{ ucwords($date->now()->addDay(6)->formatLocalized('%A %d- %B -%Y')) }}</p>
 											
-								<tr>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-hover">
+										
+								<thead class="table-dark">
 												
-									@foreach($pistas as $pista)
+									<tr>
+													
+										@foreach($pistas as $pista)
 
-										<th class="col-2">
-											{{ $pista->name }}
-										</th>
-											
-									@endforeach
+											<th class="col-2">
+												{{ $pista->name }}
+											</th>
+												
+										@endforeach
 
-								</tr>
+									</tr>
 
-							</thead>
+								</thead>
 
-							<tbody class="table">
-											
-								<tr>
-									@foreach($pistas as $pista)
-										<td>
-											@if($pista->verDisponibilidad() == 'Disponible')
+								<tbody class="table">
+												
+									<tr>
+										@foreach($pistas as $pista)
+											<td>
+												@if($pista->verDisponibilidad() == 'Disponible')
 
-												@foreach($horarios as $horario)
+													@foreach($horarios as $horario)
 
-													<p>
-														<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
+														<p>
+															<span class="btn-group"><span class="btn btn-dark">{{ substr($horario->hora, 0 , -3) }}</span>
 
-															@foreach($reservas as $reserva)
+																@foreach($reservas as $reserva)
 
-																@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(6)->formatLocalized('%Y-%m-%d'))
+																	@if($reserva->obtenerPista() == $pista->name && $reserva->obtenerHorario() == $horario->hora && $reserva->fecha == $date->now()->addDay(6)->formatLocalized('%Y-%m-%d'))
 
-																	@if($reserva->contarNumeroJugadores() == 0)
+																		@if($reserva->contarNumeroJugadores() == 0)
 
-																		<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
-
-
-																			{!! csrf_field() !!} 
-
-																			{{ method_field('DELETE') }} 
-
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
-
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
-
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
-
-																			</div>
-																		</form>
-																		
-
-																	@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
-																		<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
-
-																		<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+																			<span class="btn btn-danger"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
 
 
-																			{!! csrf_field() !!} 
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
 
-																			{{ method_field('DELETE') }} 
 
-																			<div class="btn-group">
-																				
-																				<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+																				{!! csrf_field() !!} 
 
-																				<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+																				{{ method_field('DELETE') }} 
 
-																				<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
 
-																			</div>
-																		</form>
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+																			
+
+																		@elseif($reserva->contarNumeroJugadores() > 0 && $reserva->contarNumeroJugadores() < 4)
+																			<span class="btn btn-warning"><span class="badge badge-light">{{ $reserva->contarNumeroJugadores() }}</span></span></span>
+
+																			<form action="{{ route('reservas.destroy', $reserva) }}" method="POST">
+
+
+																				{!! csrf_field() !!} 
+
+																				{{ method_field('DELETE') }} 
+
+																				<div class="btn-group">
+																					
+																					<a href="{{ route('reservas.show', $reserva) }}" class="btn btn-outline-primary"><span class="oi oi-eye"></span></a>
+
+																					<a href="{{ route('reservas.edit', $reserva) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+
+																					<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+
+																				</div>
+																			</form>
+
+																		@endif
 
 																	@endif
 
+																@endforeach
+
+																@if($horario->obtenerReserva($pista->id,$date->now()->addDay(6)->formatLocalized('%Y-%m-%d')) == false)
+
+																	<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+
+																	<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(6)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+
 																@endif
 
-															@endforeach
+														</p>
 
-															@if($horario->obtenerReserva($pista->id,$date->now()->addDay(6)->formatLocalized('%Y-%m-%d')) == false)
+													@endforeach
+												
+												@else
 
-																<span class="btn btn-primary"><span class="badge badge-light">4</span></span></span>
+													<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
+													<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
 
-																<a href="{{ route('reservas.create', [ 'pista' => $pista, 'horario' => $horario->id, 'id_hace_reserva' => Auth::user(), 'fecha' => $date->now()->addDay(6)->formatLocalized('%Y-%m-%d')]) }}" class="btn btn-outline-success"><span class="oi oi-plus"></span></a>
+												@endif
+															
+											</td>
+										@endforeach
+									</tr>
+												
+								</tbody>
 
-															@endif
-
-													</p>
-
-												@endforeach
-											
-											@else
-
-												<p class="alert alert-danger">{{ $pista->verDisponibilidad() }}</p>
-												<p class="alert alert-danger">{{ $club->obtenerServicio(5) }}</p>
-
-											@endif
-														
-										</td>
-									@endforeach
-								</tr>
-											
-							</tbody>
-
-						</table>
-					</div>
+							</table>
+						</div>
+					@endif
 				</div>
 			</div>
-
 		</div>	
 
 	</div>

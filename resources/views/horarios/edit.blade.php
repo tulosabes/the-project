@@ -7,7 +7,7 @@
 <div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-6">
 		
-		<h4 class="card-header">
+		<h4 class="card-header letraColor">
 			Editar {{ $horario->name }}
 		</h4>
 

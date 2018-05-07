@@ -2,12 +2,16 @@
 
 @section('title', "Crear reserva")
 
+@section('script');
+	<script src="{{ asset('js/scriptReservas.js') }}"></script> 
+@endsection
+
 @section('content')
 
 <div class="row justify-content-center"> 
-	<div class="card col-sm-12 col-md-10">
+	<div class="card col-sm-12 col-md-12">
 		
-		<h4 class="card-header">
+		<h4 class="card-header letraColor">
 			Crear reserva
 		</h4>
 
@@ -98,9 +102,9 @@
 					
 						<label for="nivel" class="control-label">Nivel:</label>
 
-						<select name="niveles" id="niveles" class="form-control">
+						<select name="nivel" id="nivel" class="form-control">
 
-							<option value="">Nivel de la partida</option>
+							<option value="0" id="optionNivel" selected="selected">Seleccione el nivel</option>
 							
 							@foreach ($niveles as $nivel)
 
@@ -110,9 +114,9 @@
 
 						</select>
 
-						@if ($errors->has('niveles'))
+						@if ($errors->has('nivel'))
 
-							<div class="alert alert-danger">{{ $errors->first('niveles') }}</div>
+							<div class="alert alert-danger">{{ $errors->first('nivel') }}</div>
 
 						@endif
 
@@ -127,28 +131,28 @@
 	                    <label for="jugador1" class="control-label">Jugador 1:</label>
 	                    <select name="jugador1" id="jugador1" class="form-control">
 	                        
-	                        <option value="" class="">Sin jugador</option>
+	                        <option value="" class="btn-outline-danger" id="optionJugador1">Seleccionar jugador</option>
 
-	                        @foreach($jugadores as $jug)
+	                        <!--@foreach($jugadores as $jug)
 
-	                        		@if(isset($reserva))
+								@if(isset($reserva))
 
-	                        			@if($reserva->id_jugador_1 == $jug->id)
+									@if($reserva->id_jugador_1 == $jug->id)
 
-		                                	<option value="{{ $jug->id }}" selected="selected">{{ $jug->name }}</option>
-		                               
-		                                @endif
+										<option class="letraColor" value="{{ $jug->id }}" selected="selected">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
+								
+									@endif
 
-		                                	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+										<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @else
+								@else
 
-		                            	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+									<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @endif
+								@endif
 
 
-	                        @endforeach
+	                        @endforeach-->
 
 	                    </select>
 
@@ -166,27 +170,27 @@
 	                    <label for="jugador2" class="control-label">Jugador 2:</label>
 	                    <select name="jugador2" id="jugador2" class="form-control">
 	                        
-	                        <option value="" class="">Sin jugador</option>
+	                        <option value="" class="btn-outline-danger" id="optionJugador2">Seleccionar jugador</option>
 
-	                        @foreach($jugadores as $jug)
+	                        <!--@foreach($jugadores as $jug)
 
-	                                @if(isset($reserva))
+								@if(isset($reserva))
 
-	                        			@if($reserva->id_jugador_2 == $jug->id)
+									@if($reserva->id_jugador_2 == $jug->id)
 
-		                                	<option value="{{ $jug->id }}" selected="selected">{{ $jug->name }}</option>
-		                               
-		                                @endif
+										<option class="letraColor" value="{{ $jug->id }}" selected="selected">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
+								
+									@endif
 
-		                                	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+										<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @else
+								@else
 
-		                            	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+									<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @endif
+								@endif
 
-	                        @endforeach
+	                        @endforeach-->
 
 	                    </select>
 
@@ -204,27 +208,27 @@
 	                    <label for="jugador3" class="control-label">Jugador 3:</label>
 	                    <select name="jugador3" id="jugador3" class="form-control">
 	                        
-	                        <option value="" class="">Sin jugador</option>
+	                        <option value="" class="btn-outline-danger" id="optionJugador3">Seleccionar jugador</option>
 
-	                        @foreach($jugadores as $jug)
+	                        <!--@foreach($jugadores as $jug)
 
-	                                @if(isset($reserva))
+								@if(isset($reserva))
 
-	                        			@if($reserva->id_jugador_3 == $jug->id)
+									@if($reserva->id_jugador_3 == $jug->id)
 
-		                                	<option value="{{ $jug->id }}" selected="selected">{{ $jug->name }}</option>
-		                               
-		                                @endif
+										<option class="letraColor" value="{{ $jug->id }}" selected="selected">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
+								
+									@endif
 
-		                                	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+										<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @else
+								@else
 
-		                            	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+									<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @endif
+								@endif
 
-	                        @endforeach
+	                        @endforeach-->
 
 	                    </select>
 
@@ -242,27 +246,27 @@
 	                    <label for="jugador4" class="control-label">Jugador 4:</label>
 	                    <select name="jugador4" id="jugador4" class="form-control">
 	                        
-	                        <option value="" class="">Sin jugador</option>
+	                        <option value="" class="btn-outline-danger" id="optionJugador4">Seleccionar jugador</option>
 
-	                        @foreach($jugadores as $jug)
+	                        <!--@foreach($jugadores as $jug)
 
-	                                @if(isset($reserva))
+								@if(isset($reserva))
 
-	                        			@if($reserva->id_jugador_4 == $jug->id)
+									@if($reserva->id_jugador_1 == $jug->id)
 
-		                                	<option value="{{ $jug->id }}" selected="selected">{{ $jug->name }}</option>
-		                               
-		                                @endif
+										<option class="letraColor" value="{{ $jug->id }}" selected="selected">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
+								
+									@endif
 
-		                                	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+										<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @else
+								@else
 
-		                            	<option value="{{ $jug->id }}">{{ $jug->name }}</option>
+									<option class="letraColor" value="{{ $jug->id }}">{{ $jug->name }} {{ $jug->telefono }} ({{ substr($jug->obtenerNivel(),0,3) }})</option>
 
-		                            @endif
+								@endif
 
-	                        @endforeach
+	                        @endforeach-->
 
 	                    </select>
 

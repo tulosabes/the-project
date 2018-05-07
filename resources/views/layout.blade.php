@@ -13,8 +13,11 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('plugin/bootstrap-4/css/bootstrap.css') }}">
 
-    <script src="../../plugin/jquery/jquery.js"></script>
+    <script src="{{ asset('plugin/jquery/jquery.js') }}"></script>
     <script src="{{ asset('plugin/bootstrap-4/js/bootstrap.js') }}"></script>
+
+    <!-- MI SCRIPT -->
+    @yield('script')
 
     <!--para los iconos de boostrap-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css">
@@ -71,7 +74,7 @@
            <!-- <li class="nav-item active">
               <a class="nav-link" href="{{ route('welcome') }}"><span class="oi oi-home"></span> Home <span class="sr-only">(current)</span></a>
             </li>
-           <li class="nav-item active">
+           <li class="nav-item ">
               <a class="nav-link" href=""><span class="oi oi-home"></span> Club</a>
             </li>
             <li class="nav-item">
@@ -148,5 +151,5 @@
       
     @show
     
-    
+  </body>
 </html>

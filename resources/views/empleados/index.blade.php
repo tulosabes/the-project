@@ -2,6 +2,10 @@
 
 @section('title', 'Empleados')
 
+@section('script');
+	<script src="{{ asset('js/scriptEmpleados.js') }}"></script> 
+@endsection
+
 @section('content')
 
 	<div class="d-flex justify-content-between align-items-end mb-3">
@@ -15,21 +19,17 @@
 	@if ($empleados->isNotEmpty())
 
 		<div class="table-responsive ">
-			<table class="table table-bordered table-striped table-hover">
+			<table class="table table-bordered table-striped table-hover" id="tableEmpleados">
 			
 				<thead class="table-dark">
 					
 					<tr>
-						<th class="col-sm-1">Nombre</th>
-						<th class="col-sm-1">Apellidos</th>
-						<th class="col-sm-1">Dni</th>
-						<th class="col-sm-1">Email</th>
+						<th class="col-sm-2">Nombre</th>
+						<th class="col-sm-4">Email</th>
 						<th class="col-sm-1">Teléfono</th>
 						<th class="col-sm-1">Nivel</th>
-						<th class="col-sm-1">Dirección</th>
 						<th class="col-sm-1">Población</th>
 						<th class="col-sm-1">Provincia</th>
-						<th class="col-sm-1">CP</th>
 						<th class="col-sm-1">Acciones</th>
 
 					</tr>
@@ -42,29 +42,15 @@
 
 						<tr>
 							<td>{{ ucwords($empleado->name) }}</td>
-							<td>{{ ucwords($empleado->apellidos) }}</td>
-							
-							@if ($empleado->dni === null)
-
-								<td>{{ $empleado->nif }}</td>
-
-							@else
-
-								<td>{{ $empleado->dni }}</td>
-
-							@endif
-
 							<td>{{ $empleado->email }}</td>
 							<td>{{ $empleado->telefono }}</td>
 							<td>{{ $empleado->obtenerNivel() }}</td>
-							<td>{{ ucwords($empleado->direccion) }}</td>
 							<td>{{ $empleado->obtenerPoblacion() }}</td>
 							<td>{{ $empleado->obtenerProvincia() }}</td>
-							<td>{{ $empleado->obtenerCPostal() }}</td>
 
-							<td>
+							<td class="text-center">
 								
-								<form action="{{ route('empleados.destroy', $empleado) }}" method="POST">
+								<form action="{{ route('empleados.destroy', ':USER_ID') }}" method="POST" id="formIndexEmpleados">
 
 
 									{!! csrf_field() !!} <!-- proteccion de la insercion de datos de terceros, este toquen mantiene la proteccion activa y es mejor usarlo aqui que quitarlo del archivo Http/Kernel.php la directiva \App\Http\Middleware\VerifyCsrfToken::class valdria con comentarla (siempre dentro del formulario)-->
@@ -78,7 +64,7 @@
 
 										<a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
 
-										<button type="submit" class="btn btn-outline-danger"><span class="oi oi-trash"></span></button>
+									<button type="" class="btn btn-outline-danger eliminarEmpleado" value="{{ $empleado->id }}"><span class="oi oi-trash"></span></button>
 									</div>
 								</form>
 							</td>
@@ -90,6 +76,13 @@
 
 			</table>
 		</div>
+
+		<div class="row justify-content-center mt-3">
+			
+			{{ $empleados->render('pagination::bootstrap-4') }}
+			
+		</div>
+
 	@else
 
 		<p>No hay empleados registrados</p>

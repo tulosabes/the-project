@@ -2,12 +2,16 @@
 
 @section('title', "Editar club")
 
+@section('script');
+	<script src="{{ asset('js/scriptClub.js') }}"></script> 
+@endsection
+
 @section('content')
 
 <div class="row justify-content-center"> 
 	<div class="card col-sm-12 col-md-8">
 		
-		<h4 class="card-header">
+		<h4 class="card-header letraColor">
 			Editar club {{ $club->name }}
 		</h4>
 
@@ -25,7 +29,7 @@
 				
 				<div class="row">
 					
-					<div class="form-group col-sm-12 col-md-6 col-lg-4">
+					<div class="form-group col-sm-12 col-md-6 col-lg-6">
 					
 						<label for="name" class="control-label">Nombre:</label>
 						<input type="text" name="name" id="name" placeholder="Carlos" class="form-control" value="{{ old('name', $club->name) }}">
@@ -58,7 +62,7 @@
 					<div class="form-group col-sm-12 col-md-12 col-lg-6">
                         
 						<label for="email-confirm" class="control-label">Confirmar email</label>
-						<input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation">
+						<input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation" value="{{ old('email-confirm' , $club->email) }}">
 					
 					</div>
 
@@ -97,9 +101,9 @@
 	                    <label for="provincia" class="control-label">Provincia:</label>
 	                    <select name="provincia" id="provincia" class="form-control">
 	                        
-	                        @foreach($provincias as $pro)
+	                        <option value="0" id="optionProvincia">Elija una provincia</option>
 
-	                        	
+	                        @foreach($provincias as $pro)
 
 	                            @if ($club->id_provincia === $pro->id)
 
@@ -131,6 +135,8 @@
 	                    <label for="poblacion" class="control-label">Población:</label>
 	                    <select name="poblacion" id="poblacion" class="form-control">
 	                        
+	                        <option value="0" id="optionPoblacion">Elija una población</option>
+
 	                        @foreach ($poblaciones as $poblacion)
 
 
@@ -147,15 +153,13 @@
 
 	                        @endforeach
 
-
 	                    </select>
 
-	                    @if ($errors->has('poblacion'))
+	                     @if ($errors->has('poblaciones'))
 
-	                        <div class="alert alert-danger">{{ $errors->first('poblacion') }}</div>
+	                        <div class="alert alert-danger">{{ $errors->first('poblaciones') }}</div>
 
 	                    @endif
-
 
 	                </div>
 

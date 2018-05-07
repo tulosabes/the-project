@@ -40,13 +40,11 @@ class JugadoresController extends Controller
 
         $provincias = Provincia::orderBy('provincia', 'asc')->get();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
-
         $date = Carbon::now();
 
         $niveles = Nivel::all();
         
-        return view('jugadores.create', ['niveles' => $niveles,'provincias' => $provincias, 'poblaciones' => $poblaciones, 'date' => $date]);
+        return view('jugadores.create', ['niveles' => $niveles,'provincias' => $provincias, 'date' => $date]);
     }
 
     public function store(){
@@ -64,8 +62,12 @@ class JugadoresController extends Controller
             'telefono' => array('required','numeric','unique:users','regex:/^[9|6|7][0-9]{8}$/'),
             'password' => 'required|string|min:6|confirmed',
             'niveles' => 'required',
-            'poblacion' => 'min:1',
-            'provincia' => 'min:1',
+            'poblacion' => 'numeric|min:1',
+            'provincia' => 'numeric|min:1',
+        ],
+        [
+            'poblacion.min' => 'Tiene que elegir una población',
+            'provincia.min' => 'Tiene que elegir una provincia'
         ]);
 
         User::create([
@@ -96,7 +98,7 @@ class JugadoresController extends Controller
 
         $provincias = Provincia::orderBy('provincia', 'asc')->get();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
+        $poblaciones = Poblacion::where('id_provincia', $jugador->id_provincia)->orderBy('poblacion', 'asc')->get();
 
         $date = Carbon::now();
 
@@ -124,13 +126,16 @@ class JugadoresController extends Controller
             'fecha_nacimiento' => 'required',
             'apellidos' => 'nullable|string|max:50',
             'direccion' => 'nullable|string|max:50',
-            'poblacion' => 'min:1',
-            'provincia' => 'min:1',
             'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($jugador->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($jugador->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
             'niveles' => 'required',
+            'poblacion' => 'numeric|min:1',
+            'provincia' => 'numeric|min:1',
+        ],
+        [
+            'poblacion.min' => 'Tiene que elegir una población',
+            'provincia.min' => 'Tiene que elegir una provincia'
         ]);
-
 
 
         if ($data['password'] != null) {
@@ -150,11 +155,15 @@ class JugadoresController extends Controller
                 'sexo' => 'required',
                 'apellidos' => 'nullable|string|max:50',
                 'direccion' => 'nullable|string|max:50',
-                'poblacion' => 'min:1',
-                'provincia' => 'min:1',
                 'dni' => array('required_if:nif,==,0',Rule::unique('users')->ignore($jugador->id),'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'nif' => array('required_if:dni,==,0',Rule::unique('users')->ignore($jugador->id),'regex:/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i','nullable'),
                 'niveles' => 'required',
+                'poblacion' => 'numeric|min:1',
+                'provincia' => 'numeric|min:1',
+            ],
+            [
+                'poblacion.min' => 'Tiene que elegir una población',
+                'provincia.min' => 'Tiene que elegir una provincia'
             ]);
 
             $jugador->id_poblacion = $data['poblacion'];
@@ -174,12 +183,27 @@ class JugadoresController extends Controller
         return redirect()->route('jugadores.show', ['user' => $jugador]);
     }
 
-    public function destroy(User $jugador){
+    public function destroy(Request $request,$id_jugador){
 
         //dd($jugador);
 
-        $jugador->delete();
+        //$this->user->delete();
 
-        return redirect()->route('jugadores.index');
+        if($request->ajax()){
+
+            $jugador = User::find($id_jugador);
+
+            $msn = ['nombre' => 'El jugador ' . $jugador->name . ' fue eliminado'];
+
+            $jugador->delete();
+
+            return $msn;
+        
+        }else{
+
+            $msn = ['nombre' => 'La petición no a tenido efecto'];
+
+            return $msn;
+        }
     }
 }

@@ -43,7 +43,7 @@
 						<td>{{ $cl->obtenerPoblacion() }}</td>
 						<td>{{ $cl->obtenerProvincia() }}</td>
 						<td>{{ $cl->obtenerCPostal() }}</td>
-						<td><a href="{{ route('club.edit', $cl) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a></td>
+						<td class="text-center"><a href="{{ route('club.edit', $cl) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a></td>
 					</tr>
 				@endforeach
 

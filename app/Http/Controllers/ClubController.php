@@ -17,6 +17,9 @@ use Illuminate\Validation\Rule;
 
 class ClubController extends Controller
 {
+    
+    
+
     public function index(){
  
         $title = 'Información del club';
@@ -33,13 +36,14 @@ class ClubController extends Controller
         return redirect()->route('club.index');
     }
 
-    public function edit(Club $club){
+    public function edit(Request $request, Club $club){
 
+        
         $provincias = Provincia::orderBy('provincia', 'asc')->get();
+        $poblaciones = Poblacion::where('id_provincia', $club->id_provincia)->get();
 
-        $poblaciones = Poblacion::orderBy('poblacion', 'asc')->get();
-
-    	return view('club.edit', compact('club','provincias','poblaciones'));
+        return view('club.edit', compact('provincias','club', 'poblaciones'));
+        
     }
 
     public function update(Club $club){
@@ -50,9 +54,13 @@ class ClubController extends Controller
     		'email' => ['required','email','confirmed'], 
     		'telefono' => array('required','numeric','regex:/^[9|6|7][0-9]{8}$/'),
     		'direccion' => 'required|max:50',
-    		'poblacion' => 'min:1',
-            'provincia' => 'min:1',
-    	]);
+    		'poblacion' => 'numeric|min:1',
+            'provincia' => 'numeric|min:1',
+    	],
+        [
+            'poblacion.min' => 'Tiene que elegir una población',
+            'provincia.min' => 'Tiene que elegir una provincia'
+        ]);
 
 		//dd($club);
 		

@@ -37,8 +37,9 @@
 										<td class="col-sm-3">{{ $pista->name }}</td>
 										<td class="col-sm-5">{{ $pista->descripcion }}</td>
 										<td class="col-sm-3">{{ $pista->VerDisponibilidad() }}</td>
-										<td class="col-sm-1">
-										<a href="{{ route('pistas.edit', $pista) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span></a>
+										<td class="col-sm-1 text-center">
+											<a href="{{ route('pistas.edit', $pista) }}" class="btn btn-outline-warning"><span class="oi oi-pencil"></span>
+										</a>
 									</td>
 								</tr>
 						

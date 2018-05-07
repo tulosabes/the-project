@@ -2,11 +2,15 @@
 
 @section('title', "Resgistro para RP-PADEL")
 
+@section('script');
+	<script src="{{ asset('js/scriptRegistro.js') }}"></script> 
+@endsection
+
 @section('content')
 
     <div class="row justify-content-center">    
     <div class="card col-sm-12 col-md-8 ">
-        <div class="card-header">Registro</div>
+        <h4 class="card-header letraColor">Registro</h4>
 
         <div class="card-body">
             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -47,11 +51,11 @@
 
                     <div class="form-group col-sm-12 col-md-12 col-lg-4">
                         
-                        <label for="dnis" class="control-label">Tipo de documento:</label>
-                        <select id="dnis" name="dnis" class="form-control">
+                        <label for="documento" class="control-label">Tipo de documento:</label>
+                        <select id="documento" name="documento" class="form-control">
                             
                             <option value="sin">Sin documento</option>  
-                            <option value="nif">NIF</option>
+                            <option value="nif">DNI</option>
                             <option value="nie">NIE</option>                          
 
                         </select>
@@ -133,7 +137,7 @@
                     <div class="form-group col-sm-12 col-md-12 col-lg-6">
                         
                         <label for="email-confirm" class="control-label">Confirmar email:</label>
-                        <input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation">
+                        <input id="email-confirm" type="email" placeholder="" class="form-control" name="email_confirmation"  value="{{ old('email-confirm') }}">
                 
                         @if ($errors->has('email-confirm'))
 
@@ -143,7 +147,11 @@
 
                     </div>
 
-                    <div class="form-group col-sm-12 col-md-12 col-lg-4">
+                </div>
+
+                <div class="row">
+                    
+                     <div class="form-group col-sm-12 col-md-12 col-lg-4">
                         
                         <label for="telefono" class="control-label">Teléfono:</label>
                         <input type="text" name="telefono" id="telefono" placeholder="666777888" class="form-control"  value="{{ old('telefono') }}">
@@ -156,11 +164,7 @@
 
                     </div>
 
-                </div>
-        
-                <div class="row">
-                    
-                    <div class="form-group col-sm-12 col-md-12 col-lg-4">
+                    <div class="form-group col-sm-12 col-md-12 col-lg-8">
                     
                         <label for="direccion" class="control-label">Dirección:</label>
                         <input type="text" name="direccion" id="direccion" placeholder="" class="form-control" value="{{ old('direccion') }}">
@@ -173,12 +177,16 @@
 
                     </div>
 
+                </div>
+        
+                <div class="row">
+
                     <div class="form-group col-sm-12 col-md-6 col-lg-4">
                         
                         <label for="provincia" class="control-label">Provincia:</label>
                         <select name="provincia" id="provincia" class="form-control">
                             
-                            <option value="">Elija una provincia</option>
+                            <option value="0" id="optionProvincia">Elija una provincia</option>
 
                             @foreach($provincias as $pro)
 
@@ -202,13 +210,7 @@
                         <label for="poblacion" class="control-label">Población:</label>
                         <select name="poblacion" id="poblacion" class="form-control">
                             
-                            <option value="">Elija una poblacion</option>
-
-                            @foreach ($poblaciones as $poblacion)
-
-                                <option value="{{ $poblacion->id }}">{{ $poblacion->poblacion }}</option>
-
-                            @endforeach
+                            <option value="0" id="optionPoblacion">Elija una poblacion</option>
 
 
                         </select>

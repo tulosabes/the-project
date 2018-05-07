@@ -46,12 +46,21 @@ class Club extends Model
         return $poblacion->c_postal;
     } 
 
-    public function obtenerServicio($id){
+    public function obtenerServicioName($id){
 
         $servicio = Servicio::find($id);
 
         //dd($servicio->name);
 
         return $servicio->name;
+    }
+
+    public function obtenerServicioDescrip($id){
+
+        $servicio = Servicio::find($id);
+
+        //dd($servicio->name);
+
+        return $servicio->descripcion;
     }
 }

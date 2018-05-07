@@ -84,7 +84,7 @@ class ReservasController extends Controller
 			'fecha' => 'required',
 			'pistas' => 'required',
 			'horarios' => 'required',
-			'niveles' => 'required',
+			'nivel' => 'numeric|min:1',
 			'jugador1' => 'required_without_all:jugador2,jugador3,jugador4',
 			'jugador2' => 'required_without_all:jugador1,jugador3,jugador4',
 			'jugador3' => 'required_without_all:jugador1,jugador2,jugador4',
@@ -99,7 +99,7 @@ class ReservasController extends Controller
 			'fecha' => $datos['fecha'],
 			'id_pista' => $datos['pistas'],
 			'id_horario' => $datos['horarios'],
-			'id_nivel' => $datos['niveles'],
+			'id_nivel' => $datos['nivel'],
 			'id_jugador_1' => $datos['jugador1'],
 			'id_jugador_2' => $datos['jugador2'],
 			'id_jugador_3' => $datos['jugador3'],
@@ -120,7 +120,7 @@ class ReservasController extends Controller
 
 		$horarios = Horario::all();
 
-		$jugadores = User::where('id_rol', 3)->get();
+		$jugadores = User::where('id_rol', 3)->where('id_nivel',$reserva->id_nivel)->get();
 
 		return view('reservas.edit', compact('reserva', 'pistas', 'horarios', 'niveles', 'jugadores'));
 
@@ -133,7 +133,7 @@ class ReservasController extends Controller
 			//'fecha' => 'required',
 			//'pistas' => 'required',
 			//'horarios' => 'required',
-			'niveles' => 'required',
+			'nivel' => 'numeric|min:1',
 			'jugador1' => 'required_without_all:jugador2,jugador3,jugador4',
 			'jugador2' => 'required_without_all:jugador1,jugador3,jugador4',
 			'jugador3' => 'required_without_all:jugador1,jugador2,jugador4',
@@ -146,7 +146,7 @@ class ReservasController extends Controller
 		//$reserva->fecha = $datos['fecha'];
 		//$reserva->id_pista = $datos['pistas'];
 		//$reserva->id_horario = $datos['horarios'];
-		$reserva->id_nivel = $datos['niveles'];
+		$reserva->id_nivel = $datos['nivel'];
 		$reserva->id_jugador_1 = $datos['jugador1'];
 		$reserva->id_jugador_2 = $datos['jugador2'];
 		$reserva->id_jugador_3 = $datos['jugador3'];
@@ -192,7 +192,8 @@ class ReservasController extends Controller
 		}
 
 		//return view('reservas.show', compact('reserva'));
-
 	}
+
+	
 
 }

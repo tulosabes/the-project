@@ -5,7 +5,7 @@
 @section('content')
         <div class="row justify-content-center">
             <div class="card col-sm-12 col-md-8 col-lg-4">
-                <div class="card-header">Entrar</div>
+                <h4 class="card-header letraColor">Entrar</h4>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Club;
 use App\User;
+use App\Poblacion;
 
 class WelcomeUserController extends Controller
 {
@@ -25,6 +26,15 @@ class WelcomeUserController extends Controller
 			return "Bienvenido {$name}";
 		}
 	}*/
+
+	//ruta publica para traer las poblaciones a los SELECT
+	public function poblaciones($id_provincia){
+
+        $poblaciones = Poblacion::where('id_provincia', $id_provincia)->orderBy('poblacion', 'asc')->get();
+
+        return response()->json($poblaciones);
+        
+    }
 	
 	public function index(){
 
