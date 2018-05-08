@@ -15,6 +15,7 @@
 
     <script src="{{ asset('plugin/jquery/jquery.js') }}"></script>
     <script src="{{ asset('plugin/bootstrap-4/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/scriptLogout.js') }}"></script> 
 
     <!-- MI SCRIPT -->
     @yield('script')
@@ -130,6 +131,30 @@
           <div class="col">
                 
              @yield('content')
+
+             <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content bg-dark">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-default letraColor" id="exampleModalLongTitle">Salir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body letraColor">
+                    <p>¿Esta seguro que desea salir de su cuenta de usuario?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Seguir conectado</button>
+                    <a href="{{ route('logout') }}" class="nav-link btn btn-danger" id="logout"><span class="oi oi-account-logout"></span> Salir</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
 

@@ -2,10 +2,6 @@
 
 @section('title', "Bienvenido a RP-PADEL")
 
-@section('script');
-    <script src="{{ asset('js/scriptLogout.js') }}"></script> 
-@endsection
-
 @if (Auth::user()->id_rol == 1)
 
     @section('nav')
@@ -58,8 +54,6 @@
 
         <li class="nav-item">
             <a class="nav-link btn btn-outline-danger"  data-toggle="modal" data-target="#exampleModalCenter"><span class="oi oi-account-logout"></span> Salir</a>
-
-            
         </li>
 
         @section('loginRegister')
@@ -82,30 +76,6 @@
                 @endif
             </div>
         </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content bg-dark">
-      <div class="modal-header">
-        <h5 class="modal-title text-default" id="exampleModalLongTitle">Salir</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body letraColor">
-        <p>¿Esta seguro que desea salir de su cuenta de usuario?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Seguir conectado</button>
-        <a href="{{ route('logout') }}" class="nav-link btn btn-danger" id="logout"><span class="oi oi-account-logout"></span> Salir</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
     @endsection
 
@@ -152,8 +122,7 @@
         <li class="nav-item ml-auto"><a href="{{ route('perfiles.index') }}" class="nav-link">Bienvenido {{ ucwords(Auth::user()->name) }}!!!</a></li>
 
         <li class="nav-item">
-            <a class="nav-link btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalCenter"><span class="oi oi-account-logout"></span> Salir</a>
-
+            <a class="nav-link btn btn-outline-danger"  data-toggle="modal" data-target="#exampleModalCenter"><span class="oi oi-account-logout"></span> Salir</a>
         </li>
 
         @section('loginRegister')
@@ -176,32 +145,6 @@
                 @endif
             </div>
         </div>
-
-                <!-- Button trigger modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content bg-dark">
-      <div class="modal-header">
-        <h5 class="modal-title text-default" id="exampleModalLongTitle">Salir</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body letraColor">
-        <p>¿Esta seguro que desea salir de su cuenta de usuario?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Seguir conectado</button>
-        <a href="{{ route('logout') }}" class="nav-link btn btn-danger" id="logout"><span class="oi oi-account-logout"></span> Salir</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-             {{ csrf_field() }}
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
     @endsection
 

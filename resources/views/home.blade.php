@@ -2,10 +2,6 @@
 
 @section('title', "Bienvenido a RP-PADEL")
 
-@section('script');
-    <script src="{{ asset('js/scriptLogout.js') }}"></script> 
-@endsection
-
     @section('nav')
     @stop
 
@@ -34,14 +30,10 @@
 
     @section('navLiDer')
 
-        <li class="nav-item"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ ucwords(Auth::user()->name) }}!!!</a></li>
+        <li class="nav-item ml-auto"><a href="{{ route('home.show',Auth::user() ) }}" class="nav-link">Bienvenido {{ ucwords(Auth::user()->name) }}!!!</a></li>
 
         <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" id="logout"><span class="oi oi-account-logout"></span> Salir</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                 {{ csrf_field() }}
-            </form>
+            <a class="nav-link btn btn-outline-danger"  data-toggle="modal" data-target="#exampleModalCenter"><span class="oi oi-account-logout"></span> Salir</a>
         </li>
 
         @section('loginRegister')
