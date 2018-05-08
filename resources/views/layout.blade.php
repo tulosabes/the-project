@@ -124,7 +124,6 @@
     <!-- Begin page content -->
     <main role="main" class="container">
 
-        <!-- la directiva "yield('content') lo que hace "-->
 
         <div class="row mr-1 ml-1">
 
@@ -132,7 +131,7 @@
                 
              @yield('content')
 
-             <!-- Modal -->
+            <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content bg-dark">
